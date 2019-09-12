@@ -1,0 +1,14 @@
+{
+  "name": "contador_conexiones",
+  "version": "1.0.0",
+  "description": "Contador de Conexiones Activas con Socket Io",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -e html app.js"
+  },
+  "author": "Sergio Espinoza <48479567.sjep@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^2.2.0"
+  }
+}

@@ -1,0 +1,28 @@
+crear componentes
+poner estilos 
+mandar propiedades
+cambiar estados
+manejar eventos
+
+Ciclo de vida de un componente, como entran en interaccion con la web
+Desde el desmontado, hasta el manejo de errores.
+
+Montado: En el momento de renderizar, de mount()
+
+constructor: Esto es llamado antes de que el componente sea montado, antes de instanciar una clase, desde el estado inicial o bindear eventos, o cualquier propiedad con this. No es recomendable hacer mas por que los demas estados del ciclo de vida del componente se haran cargo.
+
+WillMount: Antes de que se vaya a montar, sin que haya surgido algun problema, no tienes que hacer llamados a un API (o api del DOM) o suscripcion a eventos, porque en el servidor no tienes al DOM para hacer el manejo por eventos. Renderizado de componentes en el servidor
+
+render: Contiene JSX en en return, puedes calcular nCompleto = name + lastName.
+
+componentDidMount: Metodo llamado luego de montarse el componente(el componente ya esta en pantalla) ahi si se puede hacer el llamado al API del DOM.
+
+Actualizacion: Solo le lanza una vez.
+  Recibe esta propiedad componentWillReceive Props, esto es  el metodo llamado al recibir nueva propiedades, sirve para actualizar el estado con base a las nuevas propiedades. Validar las propiedades, setear algun estado, maniobrar los componentes, metodo otro shouldComponentUpdate, metodo que ayuda con el soporte para el mejor funcionamiento de mi aplicacion, por si se tiene que agregar algun prop repetido, es un condicionante de renderizado. Que no haga render retornando false.
+  Si paso el metodo anterior torna a componentWillUpdate ====>>>>> render : re-render.
+  ComponenteDidUpdate, despues de re-render.
+
+Desmotado = componenteWillUnmount, una aplicacion clara de esto es cuando se hace un cambio a un estado inmediato en la pausa de un video o musica y que se muestra el otro boton.
+
+
+React ^6. El manejo de Errores, componentDidCatch ocurre de padres a hijos, envuelve a todos los hijos manejandolo

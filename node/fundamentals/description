@@ -1,0 +1,24 @@
+Trabajo con el curso
+# Repositorio de la Especialidad en Programacion FullStack con Javascript de EDteam 2018 impatido por @jonmircha
+
+Node es un entorono de ejecucion de js basado en el motor V8 que compila en el navegador chrome utiliza un modelo de operacion de entrada y salida asincrona orientada a eventos que lo hace por ello de forma as rapida las consultas de lado del cliente. En su creacion se extrajo el motor de ejecucion de javascript de chrome para hacerlo funcionar en el servidor, NodeJs no es un lenguaje de programacion.
+En el servidor se llama Nodejs, en el lado cliente es javascript, trabaja con npm, tanto para el lado de front y back, esto aporto para que se prolifere su uso.
+Nodejs es opensource direccionado por la organizacion linux. Entonces en las dos versiones se le da mas soporte LTS (Long Term Suport) por que tiene menos bugs y dura aprox un año, Ejm: 8.11.3, y el de las ultimas caracteristicas. Ambos se pueden utilizar normalmente.
+node -v
+npm -v
+
+me falta nvm para instalar
+nvm install v11.7.0
+nvm list  lista de version de nodejs
+para cambiar a la version   nvm use v11.7.0
+para eliminar las version utilizar el siguiente comando
+nvm unistall lo anterior lo que no utilizas
+
+el standalone, la version unica sin uso del internet no es tan recomandable su uso pero no te impide trabajar.
+
+https://github.com/jonmircha/edfullstackjs-2018.git
+
+
+
+
+

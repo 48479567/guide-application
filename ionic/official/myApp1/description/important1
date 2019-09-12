@@ -1,0 +1,87 @@
+https://ionicthemes.com/tutorials/about/ionic-4-tutorial-mastering-web-components-in-ionic-4
+<div class="video-container" style="height:2000px; width:1500px">
+	<iframe src="https://stackblitz.com/edit/ionic-4-shadow-dom-clarification?ctl=1&amp;embed=1&amp;file=src/app/home/home.page.html&amp;hideExplorer=1&amp;hideNavigation=1"></iframe>
+  <div class="index hidden-sm hidden-xs fixed" style="display:none">
+          <a target="_blank" href="/product/black-friday-bundle">
+            <img alt="ionic 4 template" class="img-responsive banner-images" src="./assets/img/banners/black-friday-bundle-sidebar.png">
+          </a>
+  </div>
+
+  id="main-nav"
+
+
+  /////////////////////////////********************
+  const d = document
+  d.getElementsByClassName('index')[1].style.display = 'none'
+  d.getElementsByClassName('video-container')[0].style.width = '1500px'
+  d.getElementsByClassName('video-container')[0].style.height = '900px'
+  d.getElementById('main-nav').style.display = 'none'
+  d.getElementsByClassName('row')[2].className = ''
+
+  *****************************////////////////////
+
+
+1)!!!!!!!!!!!!!Ver como hacer la funcionalidad de presionar una tecla del celular como el ­­"salto de linea" para dar el efecto enter de un formulario !!!!!!
+
+2)!!!!!!!!!!!!!Manejo de Calendario para las muestras de los eventos. Esto es tanto diversos eventos, por colores, iconos tambien mostrado por filtros. !!!!!!
+
+3)!!!!!!!!!!!!!Ver el funcionamiento Simulado de Ionic fuera de linea.!!!!!!
+
+3)!!!!!!!!!!!!!Ver la forma de manejar firebase, despues de salir de linea seguir manejando una base de datos local y depues se hace el autorellenado.
+(url) https://www.youtube.com/watch?v=CFoG0xkgVlE
+!!!!!!
+
+3)!!!!!!!!!!!!!Funcionamiento por diversos medios como sqlLite, firebase, mismo mysql entre otros.!!!!!!
+
+4)!!!!!!!!!!!!!Mostrar Notificaciones fuera del celular con sonido y vibraciones!!!!!!
+
+5)!!!!!!!!!!!!!Alerts mas complejos, con una libreria creada por si mismo.!!!!!!
+
+6)!!!!!!!!!!!!!Ingreso de varios usuarios por fb, gmail, twiter u otras fuentes de cuentas externas.!!!!!!
+
+7)!!!!!!!!!!!!!Maquetado detallado de la aplicacion.!!!!!!
+
+8)!!!!!!!!!!!!!Ver la funciolidad de tener presionado la pantalla asi como los keys diversos.!!!!!!
+
+9)!!!!!!!!!!!!!.!!!!!!
+
+10)!!!!!!!!!!!!!.!!!!!!
+
+11)!!!!!!!!!!!!!.!!!!!!
+
+12)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!
+
+#)!!!!!!!!!!!!!.!!!!!!

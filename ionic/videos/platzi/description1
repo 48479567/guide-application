@@ -1,0 +1,22 @@
+Conceptos mas avanzados de ionic, con acceso a camara geolocalizacion a la vibracion misma del celular,
+
+Introduccion
+Proyecto estructura platzinger
+angular y typescript
+estilos
+acceso a datos: que tenga comunicacion con otros
+caracteristica nativas: una para celular
+conversación
+amigos
+deploy
+
+deploys: aplicacion appstore playstore ...
+
+Introduccion:
+
+Que es Ionic: aplicacion hibridas con este framework. Javascript resultado de la transpilacion de Typescript.
+Angular: Es un framework que crea Single Page Aplication(SPAs), con la interaccion entre los datos y los usuarios.
+
+Cordova: Framework de codigo abierto que es intermediario entre ionic y funcionalidades de un celular nativamente como las vibracion, camaras, geolocalizacion, y otros recursos, a traves de metodos, abstracciones, plugins, desde la tecnologia web acceder a las caracteristica nativas.
+
+Manualmente hacer esto es un tanto complejo, para ello existe Ionic CLI, que es un set de herramientas a traves de consola que ayuda a transpilar ts a js, crear un servidor local para correr el app en el navegador, celular o un virtualizador, 

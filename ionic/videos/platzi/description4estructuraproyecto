@@ -1,0 +1,48 @@
+app de mensajeria instatánea, que se puede enviar la solicitud y que esta persona pueda aceptarla o rechazarla, y que aparezca el amigo, tiene la caracteristica antigua. Despues se tiene la pantalla de home, tiene una caja de busqueda, y la pantalla de configuracion. cambiar datos basicos. Y todo ello va a estar conectado y muestra en tiempo real, agregar amigos, y agregar a a su cuenta asi no tengan habilitado una oficial de esta app. Pantalla de conversacion y mandar imagenes zumbidos, la cual no tiene caracteristica cualquier otra aplicacion, hacer las animaciones y la conexion va a ser por medio de firebase para que sea en timpo real.
+
+_command: 
+ionic start platzingermobile sidemenu
+
+incluirlo ios y android con las caracteristicas nativas y poner que "SI"
+
+ahora si se puede usar ionic Product, tiene un costo y te facilita las cosas, pero se debe hacer de forma manual, "NO".
+
+y te genera un repositorio de git
+
+_command:
+cd/platzingermobile
+
+_commando:
+ionic serve
+
+Esto ya te creo con icono de la hamburguesa con sus secciones.
+/resources
+son recursos para android y ios en el compilado.
+
+/src
+Ahi si vamos a tomar en cuenta porque se ejecuta ahi nuestra aplicacion. 
+
+src/assets
+para imagenes y archivos estaticos.
+
+src/app
+Aqui esta los archivos centrales de la aplicacion
+
+/app.module.ts
+importrar funcionales de mismo ionic, generar mas pages y otros recursos, y modulos que se crea desde cero.
+
+/app.component.ts
+Side Bar para que manejemos las paginas que aparezcan. Esta ligado el app.html
+
+/app.html
+Tag de navegacion ahi esta todo lo principal, para generar estilos globales ir a 
+
+/app.scss
+
+
+repositorio del curso
+https://github.com/EduardoIbarra
+
+repositorio completo
+https://github.com/EduardoIbarra/msn_mobile_platzi_pre/tree/pos8_nested
+

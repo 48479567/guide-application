@@ -1,0 +1,42 @@
+() Enrutamiento y Agregacion a componente para la vista en la lista desplegable.
+Para ello se hace la vista de declarion y enrutamiento de la vista, asi.
+
+
+/app.componets
+
+....
+public appPages = [
+  ...
+  {
+    title: 'PruebaHtml',
+    url: /pruebas-html',
+    icon: list
+  }
+]
+
+
+// Notar que title: Es para el manejo en los demas archivos de app, dependiendo a su enrutamiento, cuidado con icon, sino te muestra el error: 
+
+@error:::: savage: error.
+
+// Despues para la vista en el sidemenu:
+
+/app.component.spect.ts
+...
+it('should have menu labels', async () => {
+  const fixture = await TestBed.createComponent(AppComponent);
+  await fixture.detectChanges();
+  const app = fixture.nativeElement();
+  const menuItems = app.querySelectorAll('ion-label');
+  expect(menuItems.lenght).toEqual(3);
+  ...
+  expect(menuItems[2].textContent).toContain('PruebaHtml');
+})
+
+
+....
+
+if('should have urls', async () => {
+  ....
+  expect(menuItems[2].getAtribute('ng-reflect-router-link)).toEqual('/pruebas-html');
+});

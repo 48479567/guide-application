@@ -1,0 +1,45 @@
+Navegacion Basica entre pages.
+
+Este tipo de navegacion que se hizo por medio del navbar es de forma basica sin usar el navCtrl.
+
+Para ello se hace uso de botones que es sumamente facil crearlos y manejarlos. 
+
+/home.html
+
+//Dentro de click se puede asignar una variable y en tiempo real usarla. Lo que no es muy recomendable, lo correcto es llamar a una funcion desde su .ts
+<ion-content padding>
+  <button ion-button (click)="goToConversation()">Ir a Conversacion</button>
+  <button ion-button (click)="goToLogin()">Ir a Login</button>
+</ion-content>
+
+/home.ts
+
+// Cuando se pone como parametro del contructor, se convierte en una propiedad global de la clase 
+goToConversation() {
+  // navCtrl es un objeto que provee funcionalidad de navegacion en cualquier lado
+  // Aca estas agregando un elemento nuevo a este objeto, esto es en general en todo. 
+  this.navCtrl.push(ConversationPage); 
+}
+goToLogin() {
+  this.navCtrl.push(LoginPage); 
+}
+
+// Ademas esto te agrega un boton de reversa pero esto no esta en el archivo html. Esto lo agrega de forma general, lo absorve el navegador de ionic y lo muestra de forma adecuada en Android y iOS. 
+//Esto se va a hacer de forma manual en conversation.html
+
+
+/conversation.html
+
+content.
+  <button ion-butoon (click)="goToBack()">Regresar</button>
+
+/conversation.ts
+
+goToBack() {
+  this.navCtrl.pop(); // Quita el ultimo elemento del stack de navegacion (donde pueden estar repetidas la paginas si deseas).
+}
+
+
+//Se puede agregar este boton tambien en el login.html con su funcionalidad en login.ts
+
+

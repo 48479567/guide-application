@@ -1,0 +1,14 @@
+
+<div id="estilos">
+  <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">Hola</div>
+  <div v-bind:style="styleObject">Otro</div>
+  <!--El funcionamiento es tambien para la representacion en array-->
+  <div v-bind:style="[ baseStyles, overridingStyles ]">Día</div>
+
+  <!--Para las propiedades que no estan tan proliferadas, esto quiere decir que no pueden funcionar de forma adecuada en algunos navegaroes. Por lo que se hace uso de comandos externos que los mismos proveedores desarrollan, para la activacion en los comandos como "tranform" se pone un prefijo como web-kit u otros dependiendo del proveedor. Vue es conciente de ello por ellos ya desarrollo de forma predeterminada.-->
+  <div v-bind:style="{display: ['-webkit-box', '-ms-flexbox', 'flex'] }">Nos Vemos</div>
+</div>
+  <!-- En esta parte para los navegadores que admiten las propiedades sin prefijo estaran con display: flex-->
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g5_stylebinding.js"></script>

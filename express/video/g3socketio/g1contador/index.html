@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contador de Conexiones con Socket.io</title>
+</head>
+<body>
+  <h1>Contador de Conexiones con Socket.io ☻</h1>
+  <p id="hello"></p>
+  <p>
+    Número de conexiones activas: 
+    <b id="connection"></b>
+  </p>
+  <input id="mnd">
+  <p id="remandato"></p>
+  <button onclick="mandar()">Mandar</button>
+  <script src="./socket.io/socket.io.js"></script>
+  <script>
+  ; // esto por si queda algo mal conectado y no genere molestias
+  function mandar() {
+    let socket = io()
+    objeto = {mandato: document.getElementById('mnd').value}
+    socket.emit('mandato', objeto)
+    socket.on('remandato', data => {
+      document.getElementById('remandato').innerHTML = data.port
+    })
+  }
+
+
+  ((d, c, io) => {
+    io.on('hello', data => {
+      c(data)
+      d.getElementById('hello').textContent = data.message
+
+      io.emit('otro evento que me invento', {name:'Sergio', twitter:'dd@ddsd.com'})
+      io.on('remandato', data => {
+        return d.getElementById('remandato').innerHTML = data.port
+      })
+      io.emit('otro')
+    })
+  })(document, console.log, io());
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "apis_cli",
+  "version": "1.0.0",
+  "description": "Peticiones asincronas a API externas desde la cli de Node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Espinoza <4847967.sjep@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "yargs": "^12.0.5"
+  }
+}

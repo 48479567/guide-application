@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>Hola Mundo en Mxgraph</title>
+    <!--En esta parte obtiene el paquete basico de la libreria si no esta en el mismo directorio-->
+    <script>
+      mxBasePath = '../node_modules/mxgraph/javascript/src/'
+    </script>
+    <!--Carga de la Libreria-->
+    <script src="../node_modules/mxgraph/javascript/mxClient.js"></script>
+    <!--Codigo de Ejemplo-->
+    <script>
+    //El programa inicia aqui. Creando un simple grafico en el DOM con la especificacion del ID. Esta funcion es invocada del evento controlador onLoad del documento (ver abajo).
+    function main(container) {
+      if (!mxClient.isBrowserSupported()) {
+        mxUtils.error('El navegador no es compatible!', 200, false)
+      } else {
+        //Creando el grafico obtenido dentro del contenedor 'container'
+        var graph = new mxGraph(container)
+        var node = document.getElementById('graphContainer')
+        //Habilita la selecion 'rubberband'
+        new mxRubberband(graph)
+
+        var style = new Object()
+          style[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_RECTANGLE
+          style[mxConstants.STYLE_OPACITY] = 50
+          style[mxConstants.STYLE_FONTCOLOR] = 'yellow'
+          style[mxConstants.STYLE_FILLCOLOR] = 'blue'
+          graph.getStylesheet().putCellStyle('ROUNDED', style)
+
+        var vertexStyle =graph.getStylesheet().getDefaultVertexStyle()
+        vertexStyle[mxConstants.ROUNDED] = true
+
+        var edgeStyle = graph.getStylesheet().getDefaultEdgeStyle()
+        edgeStyle[mxConstants.STYLE_EDGE] = mxEdgeStyle.TopToBottom
+
+        //Obtiene por defecto el patron para estar insertando las nuevas celdas. Esto es normalmente el primer hijo de la raiz (ie. Capa 0)
+        var parent = graph.getDefaultParent()
+        //Añadir celdas al modelo en un simple paso
+        graph.getModel().beginUpdate()
+        try {
+          //(padre, id, valor, x, y, ancho, altura, estilo)
+          var v1 = graph.insertVertex(parent, null, 'Hello', 20, 20, 80, 30, 'ROUNDED')
+          var v2 = graph.insertVertex(parent, null, 'World', 200, 150, 80, 30, 'defaultVertex;strokeColor=red;fillColor=green')
+          var e1 = graph.insertEdge(parent, null, '', v1, v2)
+
+        } finally {
+          //Actualizar la pantalla
+          graph.getModel().endUpdate()
+        }
+      }
+    } 
+    </script>
+  </head>
+  <!--La pagina para el contenedor para el grafico al programa-->
+  <body onload="main(document.getElementById('graphContainer'))">
+  <!--Crea en contenedor par el grafico con una rejilla de fondo-->
+    <div id="graphContainer" style="overflow:hidden;width:321px;height:241px;background:url(../node_modules/mxgraph/javascript/src/images/window.gif)">
+    </div>
+  
+  </body>
+</html>

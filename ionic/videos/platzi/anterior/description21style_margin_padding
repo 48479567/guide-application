@@ -1,0 +1,19 @@
+sin padding en forma general
+
+<ion-content>
+<ion-content>
+
+padding a uno solo
+
+<ion-content>
+  <p padding>Lo que sea</p>
+  <p padding-left>Lo que sea</p>
+  <p padding-right>Lo que sea</p>
+  <p padding-bottom>Lo que sea</p>
+  <p padding-top>Lo que sea</p>
+  <p margin>Lo que sea</p>
+  <p margin-left>Lo que sea</p>
+  <p margin-right>Lo que sea</p>
+  <p margin-bottom>Lo que sea</p>
+  <p margin-top>Lo que sea</p>
+<ion-content>

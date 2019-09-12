@@ -1,0 +1,75 @@
+En el anterior se repite codigo. Para ello se crea un service de angular que es una clase y se inyecta en otros componentes, y despues la informacion y funciones se puede reutilizar.
+
+app/services
+
+_command:
+ng g service services/user
+
+/services/user.service.ts
+
+@Injectable({
+  // Con esto se define que va a estar disponible desde cualquier campo.
+  providedIn: 'root'
+})
+export class UserService {
+  friends: User[];
+  constructor() {
+    // Aqui va la parte de los usuarios 
+    let usuario1: User = {
+
+    }...
+    friends = [usuario1, ...];
+  }
+}
+
+//**** Ver la diferencia con interface al momento de la exportacion y el uso desde app.module.ts
+
+
+_command:
+ng serve
+
+/home.component.ts
+
+friends: User[];
+constructor(private userService: UserService) {
+  
+}
+
+/user.service.ts
+
+  ....
+  this.friends = [usuario1, ...];
+
+  getFriends() {
+    return this.friends;
+  }
+
+
+/home.component.ts
+
+constructor(private userService: UserService) {
+  this.friends = userService.getFriends();
+}
+
+
+// A veces existe una especie de desincronizacion, para ello hacer refresh en el command.
+
+// En angular a diferencia de ionic 
+
+export class ConversationComponent implements onInit {
+  friendId: any;
+  friends: User[];
+  friend: User;
+  constructor(private activateRoute: ActivateRoute, private userService: UserService) {
+    this.friendId = this.activatedRoute.snapshot.params['uid'];
+    console.log(this.friend);
+    this.friends = this.userService.getFriends();
+    this.friend = this.friends.find((record) => {
+      record.uid == this.friendId;
+    })
+    console.log(this.friend);
+  }
+  ngOnInit() {
+
+  }
+}

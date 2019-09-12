@@ -1,0 +1,52 @@
+<div id="condicional">
+<!--Para comenzar con el comando de handlebars asi
+  {{#if ok}}
+  <h1>Yes</h1>  
+  {{/if}}
+
+Con Vue ahora todo esto es de forma mas simplificada con la directiva v-if-->
+<div v-if="ok">Yes</div>
+<div v-else>No</div>
+
+<!-- como se ve se necesita de algo que lo contenga, entonces para este caso vamos a poner una etiqueta que envuelve pero que no se denota en el navegador "<template>"-->
+<template v-if="ok">
+  <h2>Title</h2>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>Now you don't</div>
+
+<div v-if="type === 'A'">A</div>
+<div v-else-if="type === 'B'">B</div>
+<div v-else-if="type === 'C'">C</div>
+<div v-else>Not A/B/C</div>
+
+<!--Reutilizando elementos con una clave = "key"-->
+<template v-if="loginType === 'username'">
+  <label>UserName</label>
+  <input placeholder="Enter your UserName">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address">
+</template>
+<button v-on:click="cambioTipoDeInicio">Ingreso</button>
+<br>
+<!--Un tanto incorrecto ya que vue nos dice que no debemos reutilizar elementos, entonces debemos poner diferentes keys para cada uno asi:-->
+<template v-if="loginType === 'username'">
+  <label>UserName<input type="text" placeholder="Enter your username" key="username-input"></label>
+</template>
+<template v-else>
+  <label>Email</label>
+  <input type="text" placeholder="Enter your email address" key="email-input">
+</template>
+<button v-on:click="cambioTipoDeInicio">Ingreso</button>
+<h2 v-show="okShow">Esto no se puede ver pero si renderiza</h2>
+</div>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g6_conditionalrendering.js"></script>

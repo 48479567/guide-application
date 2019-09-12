@@ -1,0 +1,98 @@
+Agregar habilidad para ver records
+
+Para generar un objeto dinamico del formulario
+!!! Esto es de suma importacia porque esto genera errores en el envio.
+/lugar.ts
+// como estaba antes this.lugar = navParams.get('name');
+!!!! this.lugar = navParams.get('lugar');
+Primero en 
+/lugar.ts
+
+//lugar: string = '';  esto esta cambiado por un objeto any
+lugar: any = {};
+
+//esto es por que se le da unos binding del formulario
+
+nombre-input [ngModel]="lugar.nombre"
+direccion-input [ngModel]="lugar.direccion"
+categoria-select [ngModel]="lugar.categoria"
+descripcion-txtarea [ngModel]="lugar.descripcion"
+
+feedbACK EN inputs bidireccionales se pone parentesis asi.
+
+nombre-input [(ngModel)]="lugar.nombre"
+direccion-input [(ngModel)]="lugar.direccion"
+categoria-select [(ngModel)]="lugar.categoria"
+descripcion-txtarea [(ngModel)]="lugar.descripcion"
+
+button__ (click)="guardarLugar()">Guardar Lugar</button>
+
+/lugar.ts
+  guardarLugar() {
+    console.log.(this.lugar);
+  }
+
+Como se ve el objeto esta siendo afectado entonces ahora se tiene que guardar en firebase. Ahora se va a dar lugar a lugares services donde se tiene guardado las funciones de manejo de la base de datos de firebease. para ello en el contructor agregar asi, metodo para manejo de firebase.
+
+constructor(...
+            public lugaresService: LugaresService)
+
+
+// se ve en la parte lugaresService.ts que se denota con el id, como recomendacion no aumentar en ese campo para el usuario porque no va a tener idea que es lo que va a hacer.
+
+Para no tener duplicados, generar un id para tambien sera util para generar una fecha. Entonces cuando esto se genera, es improbable que dos personas agreguen dos consultas en la misma fecha. Ademas sirve para ve cuando se creo ese objeto.
+
+/lugar.ts
+guardarLugar(){
+  this.lugar.id = Date.now();
+  this.lugaresService.createLugar(this.lugar);
+  console.log(this.lugar);
+}
+
+Cuando se quiere hace la prueba de funcionamiento se denota que manda error. El lugar service no se tiene disponible. Tanto en la inicializacion como en el importe esta lista pero en app.module.ts no esta habilitado, se tiene que hacer notar que estamos usando esta clase para poder instanciarla en otro archivo. Como no es una vista el lugar correcto es en Providers(proveedores)
+
+/app.module.ts
+
+...
+providers: [
+  ...
+  LugaresService //Tiene que estar tambien importado.
+]
+
+Cuando se hace la prueba de funcionamiento se denota que tambien manda error. En la primera para es que se esta utilizando una variable erronea que  es "place" entonces cambiar place por lugar.
+
+Cuando se hace la connotacion se denota que se tiene otro error. Esto ya esta relacion con los permisos.
+Se denego el permiso.
+WebSocketConection
+PersistenConection
+
+Entoces ir a la base de datos.
+
+Database/
+Realtime Database / GetStarted
+Rules
+
+Para leer y para escribir se tiene que estar logeado
+true
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+
+//Esto no es recomendable, por ello firebase te manda una advertencia.
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+
+Presionar Publish 
+
+Despues se hace de nuevo la prueba de funcionamiento y no marca error. Pero te manda dos registro con la unica diferencia de fecha de registro. Y se denota la conexion con firebase.
+
+
+// En la siguiente seccion se denotara la vista dinamica de las listas, y tener una base para ver que lugar se va a editar.
+

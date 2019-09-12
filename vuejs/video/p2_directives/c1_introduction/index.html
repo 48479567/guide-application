@@ -1,0 +1,77 @@
+<script src="../../../node_modules/vue/dist/vue.js"></script>
+<body>
+  
+  <div id="vm">
+    <div class="imagen">
+      <img :src="imagen">
+    </div>
+    <div class="texto">
+      <div v-text="texto"></div>
+      <!--v-text→{{}}-->
+      <div>{{ texto }}</div>
+    </div>
+    <div class="etiquetaHtml">
+      <div v-html="html"></div>
+    </div>
+    <div class="condicional">
+      <!--Vue lo elimina, no lo esconde-->
+      <div v-if="mostrar">Este es el Primer Div</div>
+      <div v-if="noMostrar">Este es el Primer Div</div>
+      <div v-if="mostrar">Este esta con div</div>
+      <div v-else>Este no</div>
+    </div>
+    <div class="contedorInvisible">
+      <!--Esto es de HTML 5-->
+      <template v-if="mostrar">
+        <h3>Titulo</h3>
+        <p>parrafo</p>
+        Este si se mostrar
+      </template>
+    </div>
+    <div class="condicionalSecuencial">
+      <div v-if="parrafo == 1">Este es el Primer Parrafo</div>
+      <div v-else-if="parrafo == 2">Este es el Segundo Parrafo</div>
+      <div v-else>Este es el Otro Parrafo</div>
+    </div>
+    <div class="show">
+      <div v-show="mostrar">
+        <p>Esto se mostrara ahora</p>
+      </div>
+    </div>
+    <div class="loop">
+      <!--Solo Array-->
+      <ol>
+        <li v-for="pais in paises">{{ pais }}</li>
+      </ol>
+      <!--Array de Objetos-->
+      <ul>
+        <li v-for="ciudad in ciudades"> {{ ciudad.nombre }} </li>
+      </ul>
+    </div>
+    <div class="indiceVfor">
+      <ul>
+        <li v-for="(pais, indice) of paises">
+          {{ indice + 1}} - {{ pais }}
+        </li>
+      </ul>
+    </div>
+    <div class="templateInVfor">
+      <ul>
+        <template v-for="pais of paises">
+          <li>
+            {{ pais }}
+          </li>
+          <hr/>
+        </template>
+      </ul>
+    </div>
+    <div class="vforInObject">
+      <ul>
+        <li v-for="(valor, llave) in empleado">
+          {{ llave }} -> {{ valor }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>

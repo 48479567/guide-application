@@ -1,0 +1,103 @@
+Para mostrarlos en el html a todos lo usuarios.
+
+/conversation.component.html
+<p>
+  {{friend}}
+</p>
+
+Como esto te muestra un object [object, object], para la impresion de los objetos de forma mas legible se puede usar las pipes de angular, son elementos que se pueden usar en html para formatear informacion y plegarlo de una forma diferente. Existen varios, en este caso se va a ver 3, comenzando por el JSON.
+Esto es con el nombre del pipe (JSON)
+
+/conversation.component.html
+<p>
+  {{friend | json}}
+</p>
+
+
+/conversation.component.ts
+
+price: number = 78.234234523542;
+
+/conversation.component.html
+<p>
+  {{friend | json}}
+</p>
+<p>
+  {{price | number: '1.2-2'}}
+  // En el parametro el punto es el separador de decimales y enteros, 1: Es tal cual, 2-2: Minimo 2 maximo 2, si no tiene decimales te pone ceros.
+</p>
+
+Esto ya sin la necesidad de usar funciones en js porque ya que solo afecta a como se ve tal dato.
+
+/conversation.component.ts
+today: any = Date.now(); // Esto es una fecha en milisegundos fecha tipo iapoc de Unix que basicamente representa en milisegundos. Existen formas de pasar en js pero se requiere pasar eso a texto y despues no queda utilizable para las postumas operaciones de forma adecuada.
+
+/conversation.component.html
+<p>
+  {{today | date: 'medium'}} // Esto es el pipe de fecha o solo date.
+</p>
+
+Definicion de Propios pipes para la Busqueda de Usuario.
+/app/pipes
+/pipes/search.ts
+
+//Recibir un arreglo una palabra de busqueda y regresar el arreglo con el match de la palabra de busqueda.
+
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+  name: 'search'
+})
+// Esto es de suma importancia porque en el decorador se forma la parte como se va a utilizar en los html.
+
+// Esto en el app.module y la implementacion de PipeTransform que usara un metodo Transform() que recibe los parametro y da un output diferente de acuerdo a ello.
+
+export class SearchPipe implements PipeTransform {
+  // value: Arreglo de Usuarios.
+  // String: que se relaciona.
+  public transform(value, args: string) {
+    if (!value) {
+      return; //Esto para asegurar que no pase conversiones raras.
+    }
+    if (!args) {
+      return value;
+    }
+    args = args.toLowerCase();
+    return value.filter((item) => {
+      return JSON.stringify(item).toLowerCase().includes(args);
+      // Lo que hace esta ultima es pasar todo el objeto a minuscula y verificar si incluye la palabra puesta.
+    });
+  }
+}
+
+/app.module.ts
+
+declarations: [
+  ...,
+  SearchPipe
+]
+
+/home.component.html
+
+<input type="text" placeholder="Buscar Amigo" [(ngModel)]="query"/>
+
+<ng-container *ngFor="let user of friends; let i = index">
+  <div>
+    <a routerLink="/conversation/{{user.id}}">
+      {{i}}. {{user.nick}} - {{user.email}}
+    </a>
+  </div>
+</ng-container>
+
+/home.component.ts
+
+query: string = '';
+// Esto despues te manda erro porque de forma predeterminada no esta disponible para el ahorro de memoria, entonces para ello ir a app.module.ts
+
+/app.module.ts
+
+import: [
+  ...,
+  FormsModule
+]
+

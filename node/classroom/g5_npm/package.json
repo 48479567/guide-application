@@ -1,0 +1,17 @@
+{
+  "name": "aprendiendo_npm",
+  "version": "1.0.0",
+  "description": "Con esta carpeta aprendemos el uso de NPm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Espinoza <48479567.sjep@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "node-sass": "^4.11.0"
+  }
+}

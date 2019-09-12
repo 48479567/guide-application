@@ -1,0 +1,171 @@
+Login de usuarios
+Cada Lugar que se tiene se asigna a un autor y meter ciertas validacion para solo el eliminarlo y editarlo
+y tambien se puede hacer una auntentificacion por medio de facebook para ingresar, la pantalla de login se hace con modal mayormente.
+
+import { ModalController } from 'ionic-angular';
+import { ModalPage } from './modal-page';
+
+export class MyPage {
+  constructor(public modalCtrl: ModalController) {
+
+  }
+  presentModal() {
+    let modal = this.modalCtrl.create(ModalPage);
+    modal.present();
+  }
+}
+
+
+Para ello se tiene que generar una nueva pagina, 
+ionic g page Login
+. de ahi va a partir todo. En vez de darle como un push se le envia como modal
+
+/login.html
+Solo bastaria hacer un boton
+para el login en este caso de facebook
+button ion-button color="primary" (click)="loginFacebook()">Login con Facebook
+
+se necesita tanto abrir o cerrar el modal por ello se creara un boton en la parte de header de login.html ionic te permite crear botones en cualquier parte de la pantalla.
+
+  <ion-buttons start>
+  <span color="primary" (click)="cancelarLogin()">Cancelar</span>
+  </ion-buttons>
+</ion-header>
+
+
+/login.ts
+
+constructor(public viewCtrl: ViewController)
+
+
+loginFacebook() {
+
+}
+cancelarLogin() {
+  this.viewCtrl.dismiss(); // esto es para cerrar la vista que se impone.
+}
+
+Desde donde se va a lanzar como modal ese login para ello se necesita una relacion de vista con otra vista
+para verificiar si el usuario ingreso o no, un buen lugar es el tabs que es global.
+
+tab.ts
+
+constructor(... public modalCtrl: ModalController ...) {
+  let modal = this.modalCtrl.create(LoginPage);
+  modal.present();
+
+}
+
+/app.module.ts
+declarar y lanzar desde declaration y entrypoint  LoginPage
+
+Pero se ve que no funciona con propiedad a parte de que se carga directamente el boton de Login
+
+ion-navbar no soporta estos tipos de componentes como el boton
+para ello cambiar por ion-toolbal en /login.html y el ion-button poner dentro del toolbar y encerrar el texto dentro de un boton tambien traer el click al boton:
+
+<ion-t>
+  <ion-title>Login con Facebook</ion-title>
+  <ion-buttons start>
+    <ion-button (click)="cancelarLogin()">
+    <span color="primary">Cancelar</span>
+    </ion-button>
+  </ion-buttons>  
+</ion-toolbar>
+
+
+Solo faltaria la parte de login para ello ir en fbase y en la parte de authentication, sign-in method habilitar la parte de fb y te pide el app id y el app secret 
+Para ello ir a facebook for developers en la parte de My Apps /Add a New App  .
+
+Nombre: IonCaching1
+y resolver el captcha
+
+
+Dashboard
+
+buscar facebookLogin/SetUp   es para WEB www
+
+Site URL provisional
+
+http://ioncaching.com   poner save y continue
+
+Puro Next y te dice como integrarlo en este caso va a ser con fireBase, despues regresar el Dashboard, y bajar hasta el ultimo 
+
+Ver el fbLogin y poner setting  y se va a poder introducir un callbackURL entonces poner el url que te da firebase
+
+y poner en la parte de Valid OAuth Redirect URIs
+
+y Poner en SaveChanges y por ultimo ir a setting basic. e ir al app Id y el app Secret copiar y pegar y guardar en firebase 
+ con esto ya esta habilitado con fb despues de ahi nomas llamar el login fb con un service de ionic
+/services/auth.services.ts
+
+import {Injectable} from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database/database';
+import {AngularFireAuth} from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
+@Injectable()
+
+export class AuthService {
+  constructor(public afDB: AngularFireDatabase,
+              public afAuth: AngularFireAuth) {
+
+  }
+  loginWithFacebook() {
+    // Pasar un Provider de Facebook
+    return this.afAuth.auth.signWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
+  logout() {
+    retur this.afAuth.auth.signOut();
+  }
+}
+
+/app.module.ts
+
+providers: [
+  ...,
+  AuthService
+]
+
+
+/login.ts
+authService 
+public authService: AuthService,
+public alertCtrl: AlertController
+
+
+loginFacebook() {
+  this.authService.loginWithFacebook().then((response) => {
+    const loginExito = this.alertCtrl.create({
+      title: 'Login con Facebook',
+      message: 'Ingresaste a la Aplicación por Medio de Facebook',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Ingresaste con FaceBook!!');
+          }
+        }
+      ]
+    });
+    loginExito.present();
+    this.viewCtrl.dismiss();
+    localStorage.setItem('loginData), JSON.stringify(response);
+    // Este ultimo es para el manejo de usuarios que se logean a la aplicacion.
+
+    
+  });
+}
+
+
+
+Despues de ello tambien es importante ver el control de los usuarios que esta ingresando. Entonces para ello en el navegador ir a 
+Aplicacion:  MenuLateral/ localStorage   
+
+LoginData
+
+y esto se puede analizar de mejor manera copiando el JSON a 
+http://jsonviewer.stack.hu/
+ y esto tambien se ve en firebase 
+ para el control de los usuarios que ingresan por medio de fb, esto tambien se puede hacer para ingresar por medio de otras aplicaciones.
+ 

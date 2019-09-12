@@ -1,0 +1,268 @@
+<head>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <div id="input">
+    <button 
+      :class="[etl.btnEst, etl.btnEsp, etl.fixRight]"
+      @click="cambioDeColor">
+      Cambiar Formato
+    </button>
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Uso Basico</h3>
+      <p>
+        Puede usar la directiva <i :class="etl.codResal">v-model</i> para crear enlaces de datos <b>bidireccionales</b> en los <b>inputs</b> del <b>form</b>, <b>textarea</b> y elementos seleccionados. Selecciona automaticamente la forma correcta de actualizar el elemento segun el tipo de entrada. Aunque un poco magico, <i :class="etl.codResal">v-model</i> es esencialmente la sintaxis a gusto para actualizar los datos de los eventos de entrada del usuario, ademas de un cuidado especial para algunos casos especiales. 
+      </p>
+      <p :class="etl.wngText">
+        <i :class="etl.codResal">v-model</i> ignorara la inicial de los atributos <i :class="etl.codResal">value</i>, <i :class="etl.codResal">checked</i> o <i :class="etl.codResal">selected</i> hallados en cualquier elemento del formulario. Siempre tratara los datos de la instancia de Vue como la principal fuente de valores. Debe declarar el valor inicial en el lado de Javascript dentro de la opcion <i :class="etl.codResal">data</i> de su componenente.
+      </p>
+      <p :class="etl.wngText">
+        Para los idiomas que requieren <b :class="etl.codResal">IME</b> (chino, japones, coreano, etc), notara que <i :class="etl.codResal">v-model</i> no se actualizara durante su composicion. Si tambien desea atender estas actualizaciones, use el evento <i :class="etl.codResal">input</i> en su lugar.
+      </p>
+
+      <h4>#Texto</h4>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.text.campCod1 }}</pre>
+      </div>
+      <input v-model="message" placeholder="editame">
+      <span>El mensaje es: {{ message }}</span>
+      <br>
+      <h4>#Texto Multilinea</h4>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.multilineText.campCod1 }}</pre>
+      </div>
+      <span>El mensaje multilinea es:</span>
+      <p>
+        {{ message }}
+      </p>
+      <textarea 
+        v-model="message" 
+        placeholder="añadir multiples lineas"
+        ></textarea>
+      <br>
+      <p :class="etl.wngText">
+        La Interpolacion en textareas (<i :class="etl.codResal">{{ cnt.basicUsage.multilineText.text1 }}</i>) no funcionara. Utilizar en su lugar <i :class="etl.codResal">v-model</i>.
+      </p>
+      <br>
+
+      <h4>#Casilla de Verificacion</h4>
+      <p>
+        Casilla de verificacion unica, valor booleano
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.checkBox.campCod1 }}</pre>
+      </div>
+      <input type="checkbox" id="checkbox" v-model="checked">
+      <label for="checkbox">{{ checked }}</label>
+      <br>
+      <p>
+        Multiples casillas de verificacion, enlazadas a la misma matriz:
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.checkBox.campCod2 }}</pre>
+      </div>
+      <div>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Nombres Seleccionados: {{ checkedNames }}</span>
+      </div>
+      <h4>#Radio</h4>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.radio.campCod1 }}</pre>
+      </div>
+      <input type="radio" id="one" value="One" v-model="picked">
+      <label for="one">One</label><br>
+      <input type="radio" id="two" value="Two" v-model="picked">
+      <label for="two">Two</label><br>
+      <span>Seleccionado: {{ picked }}</span>
+      <br>
+
+      <h4>#Seleccionar</h4>
+      <p>Seleccion Unica</p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod1.html }}</pre>
+      </div>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod1.js }}</pre>
+      </div>
+      <select v-model="selected">
+        <option disabled value="">Seleccionar una Opcion</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Seleccionado: {{ selected }}</span>
+      <br>
+      <p :class="etl.wngText">
+        Si el valor inicial de su expresión <i :class="etl.codResal">v-model</i> no coincide con ninguna de las opciones del elemento <i :class="etl.codResal">{{ cnt.basicUsage.select.text1 }}</i> se representara en un estado "no seleccionado". En iOS, esto provocará que el usuario no pueda seleccionar el primer elemento porque iOS no dispara un evento de cambio en este caso. Por lo tanto, se recomienda proporcionar una opción deshabilitada con un valor vacío, como se muestra en el ejemplo anterior.
+      </p>
+      <p>Seleccion Multiple (enlazado a Array)</p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod2.html }}</pre>
+      </div>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod2.js }}</pre>
+      </div>
+      <div>
+        <select v-model="selected_mult" multiple>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <br>
+        <span>Seleccionado(s): {{ selected_mult }}</span>
+      </div>
+      <p>Opciones Dinamicas renderizadas con <i :class="etl.codResal">v-for</i></p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod3.html }}</pre>
+      </div>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.basicUsage.select.campCod3.js }}</pre>
+      </div>
+      <div>
+        <select v-model="sel_mul_din">
+          <option v-for="option in cnt.basicUsage.select.list1" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      <span>Selecionado(s): {{ sel_mul_din }}</span>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Enlaces de Valor</h3>
+      <p>
+        Para las opciones de radio, checkbox y select, los valores del enlace <i :class="etl.codResal">v-model</i> suelen ser cadenas estaticas (o booleanos para el checkbox):
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.valueBinding.begin.campCod1.html }}</pre>
+      </div>
+      <p>
+        Pero a veces es posible que querramos vincular el valor a una propiedad dinámica en la instancia de Vue. Podemos usar <i :class="etl.codResal">v-bind</i> para lograr eso. Además, el uso de <i :class="etl.codResal">v-bind</i> nos permite vincular el valor de entrada a valores no nesariamente de cadena.
+      </p>
+      <br>
+      
+      <h4>#Casilla de Verificación</h4>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.valueBinding.checkBox.campCod1.html }}</pre>
+      </div>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.valueBinding.checkBox.campCod1.js }}</pre>
+      </div>
+      <div>
+        <input type="checkbox" v-model="toggle" true-value="yes" false-value="no">
+        <span>{{ toggle }}</span>
+      </div>
+      <p :class="etl.wngText">
+        Los atributos <i :class="etl.codResal">true-false</i> y <i :class="etl.codResal">false-value</i> no afectan al atributo <i :class="etl.codResal">value</i> de entrada, porque los navegadores no incluyen cuadros sin marcar en los envíon de formularios. Para garantizar que uno de los dos valores se presente en un formulario (por ejemplo, "si" o "no"), utilice las entradas de radio en su lugar.
+      </p>
+      <br>
+
+      <h4>#Radio</h4>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.valueBinding.radio.campCod1.html }}</pre>
+      </div>
+      <div :class="etl.cmpCod">
+        <pre>{{ cnt.valueBinding.radio.campCod1.js }}</pre>
+      </div>
+      <div>
+        <input type="radio" v-model="pick" :value="a">
+        <span>{{ a }}</span>
+        <input v-model="pick">
+      </div>
+      <br>
+
+      <h4>#Seleccion de Opciones</h4>
+     <div :class="etl.cmpCod">
+       <pre>{{ cnt.valueBinding.select.campCod1.html }}</pre>
+     </div>
+     <div :class="etl.cmpCod">
+       <pre>{{ cnt.valueBinding.select.campCod1.js }}</pre>
+     </div>
+     <div>
+       <select v-model="selected2">
+        <!-- objeto lineal en texto -->
+        <option value="" disabled>Selecciona</option>
+        <option :value="{ number: 123 }">123</option>
+       </select>
+       <span>{{ selected2.number }}</span>
+     </div>
+    </div>
+    <br><br>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Modificadores</h3>
+      
+        <h4><i :class="etl.codResal"># .lazy</i></h4>
+        <p>
+          De forma predeterminada, <i :class="etl.codResal">v-model</i> sincroniza la entrada con los datos después de cada evento <i :class="etl.codResal">input</i> (con la excepción de la composición IME como se indicó anteriormente).
+          Puede agregar el modificador <i :class="etl.codResal">lazy</i> para sincronizar en su lugar después de los eventos <i :class="etl.codResal">change</i>:
+        </p>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.lazy.campCod1.html }}</pre>
+        </div>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.lazy.campCod1.js }}</pre>
+        </div>
+        <div>
+          <!-- Sincronizando después de "input" en lugar de "change", cuando se da enter o se envÍa-->
+          <input v-model.lazy="msg">
+          <span>{{ msg }}</span>
+        </div>
+
+        <h4><i :class="etl.codResal"># .number</i></h4>
+        <p>
+          Si desea que las entradas del usuario se escriban automaticamente como un número, puede agregar el modificador <i :class="etl.codResal">number</i> a sus entradas administradas por <i :class="etl.codResal">v-model</i>:
+        </p>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.number.campCod1.html }}</pre>
+        </div>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.number.campCod1.js }}</pre>
+        </div>
+        <div>
+          <input v-model.number="age" type="number">
+          <!-- Esto es para que Vue lo interprete como numero y no como texto-->
+          <span>{{ age + 20 }}</span>        
+        </div>
+        <p>
+          Esto es muy útil porque, incluso con <i :class="etl.codResal">type="number"</i>, el valor de los elementos de entrada HTML siempre devuelven una cadena. Si no se puede analizar el valor <i :class="etl.codResal">parseFloat()</i>, se devuelve el valor original.
+        </p>
+
+        <h4><i :class="etl.codResal"># .trim</i></h4>
+        <p>
+          Si desea que el espacio en blanco de la entrada del usuario se recorte automáticamente, puede agregar el modificador <i :class="etl.codResal">trim</i> a sus entradas administradas por <i :class="etl.codResal">v-model</i>:
+        </p>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.trim.campCod1.html }}</pre>
+        </div>
+        <div :class="etl.cmpCod">
+          <pre>{{ cnt.modifiers.trim.campCod1.js }}</pre>
+        </div>
+        <div>
+          <input v-model.trim="msg2">
+          <span>{{ msg2 }}</span>
+        </div> 
+      </div>
+      <br><br>
+
+      <div :class="[etl.divEst, etl.divEsp]">
+        <h3><i :class="etl.codResal">v-model</i> con Componentes</h3>
+         <p :class="etl.wngText">
+           Si aún no está familiarizado con los componentes de Vue, puede omitir esto por ahora.
+         </p>
+         <p>
+           Los tipos de entrada incorporados de HTML no siempre satisfacen sus necesidades. Afortunadamente, los componentes de Vue le permiten crear entradas reutilizables con un comportamiento completamente personalizado. Estas entradas incluso funcionan con <i :class="etl.codResal">v-model</i>! Para obtener más información, lea acerca de las <b :class="etl.codResal">entradas personalizadas</b> en la Guía de Componentes.
+         </p>
+      </div>
+  </div>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="./g9_form_input_binding.js"></script>
+</body>

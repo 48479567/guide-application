@@ -1,0 +1,31 @@
+color=secondary
+
+<button ion-button color="secondary">Navegar a Segundo Lugar</button>
+<button ion-button color="light">light</button>
+<button ion-button>Default</button>
+<button ion-button color="secondary">Secondary</button>
+<button ion-button color="danger">danger</button>
+<button ion-button color="dark">dark</button>
+
+variables globales en los botones, damos click derecho en un boton y le damos en inspect y veremos el codigo css. Todo esto lo tenemos en variables de sass 
+
+cambiar estilos de manera global.
+
+/theme/variables.scss
+
+$colors: {
+  primary: //cambiando;
+  secondary: //cambiando;
+  danger: //cambiando;
+  light: //cambiando;
+  dark: //cambiando;
+}
+
+---
+
+
+@import "ionic.theme.default";
+Esto lo podemos cambiar a dark y todo el entorno va a cambiar
+@import "ionic.theme.dark";
+
+

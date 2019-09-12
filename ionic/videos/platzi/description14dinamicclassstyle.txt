@@ -1,0 +1,88 @@
+Generacion de clases y estilos dinamicos. 
+
+Esto es la clase de un usuario offline u online entonces las clases ahi van a ser dinamicas
+/home.scss
+
+.....
+contactOffline {
+  background-color: gray;
+  opacity: 0.5;
+}
+
+
+/home.html
+
+<div class="contarListItem contactOffline"   ...
+
+Entonces en donde entra gnClass que se genera de acuerdo a un Status de Interfaces. Esto de cada uno de los usuarios
+
+/interfaces/users.ts
+export enum Status {
+  Online = 'Online',
+  Offline = 'Offline',
+  Busy = 'Busy',
+  AppearOffline = 'Appear Offline',
+  Away = 'Away'
+}
+
+/home.html
+
+<div class="contarListItem [ngClass]="{'contacOffline':user.status == 'Offline' || user.status == 'AppearOffline'}"
+
+Como css es sensible a los espacios, se tiene que juntar en el controlador enum de interfaces.
+/interfaces/users.ts
+change: 
+'Appear Offline' by 'AppearOffline'
+
+Con ello ya funciona de manera adeada. 
+Despues ya en home.html poner los estilos dinamicos en la misma etiqueta donde se puso ngClass
+
+/home.html
+
+<div class="contarctListItem" [ngClass]="{'contactOffline': user.status == 'Offline' || user.status == 'AppearOffline'}" [ngStyle]="{'color': user.status == 'Offline' || user.status == 'AppearOffline'? 'red' : 'blue'}" 
+
+
+Cambiar Icono segun status
+
+Para ello se crea un chequeo en la parte de typescript con un controlador switch segun es estatus del usuario de ahi poner el nombre correcto de los iconos. En vez del tipico src estatico al final en el endpoint de ese path poner una funcion.
+
+/home.html
+<div class="contactListItem" [ngClass]=""....>
+  <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
+...
+
+/home.ts
+....
+  getIconByStatus(status) {
+    let icon = '';
+    switch(status) {
+      case 'Online': 
+        icon = 'logo_live_online.png';
+        break;
+      case 'Offline': 
+        icon = 'logo_live_offline.png';
+        break;
+      case 'Busy': 
+        icon = 'logo_live_busy.png';
+        break;
+      case 'Away': 
+        icon = 'logo_live_away.png';
+        break;
+      case 'AppearOffline': 
+        icon = 'logo_live_appear_offline.png';
+        break;
+    }
+    return icon;
+  }
+}
+
+Con ello ya funciona correctamiente
+
+Las siguientes clases son con el estilo de angular, para ello el usuario tiene que moldear de acuerdo a ello, con el manejo en ionic. 
+
+Acceso a datos remotos es la siguiente clase que se tiene que moldear desde angular a ionic.
+
+
+
+
+

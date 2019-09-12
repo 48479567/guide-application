@@ -1,0 +1,68 @@
+Lo que se va a hacer es que las listas generen vistas de detalle de cada una, y que el boton + agregue nuevos lugares. (esto con un formulario,)
+Navegacion de la vista lugar desde dos puntos.
+
+/home.html
+<ion-item *ngFor="let lugar of lugares" (click)="goToExistingViewDetail()">
+
+<ion-fav bottom right>
+  <button ion-fab (click)="goToDetailView()">+</button>
+
+/home.ts
+
+goToDetailView() {
+  this.navCtrl.push(LugarPage, {lugar: {}})
+})
+
+goToExistingViewDetail(lugar) {
+  this.navCtrl.push(LugarPage, {lugar: lugar})
+}
+
+En ambos es el envio de objeto en uno que no existe vacio y en el otro ya con el existente.
+
+/lugar.html
+<ion-content padding>
+  null
+</ion-content>
+
+/lugar.ts
+cambiar nombreLugar por lugar en ambos
+
+quitar los metodos de navegacion.
+
+En ese instante todos los botones manda a la vista lugar.
+
+Inputs
+
+floatingLabel 
+  Ionic con Username y Password te autocompleta para ello cambiar a Nombre y Direccion 
+
+/lugar.html
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Direccion</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select>
+        <ion-option value="AireLibre">Aire Libre</ion-option>
+        <ion-option value="LugarCerrado">Lugar Cerrado</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Descripción</ion-label>
+      <ion-textarea></ion-textarea>
+  </ion-item>
+  </ion-list>
+  <button ion-button full>Guardar Nota</button>
+
+
+
+
+
+
+

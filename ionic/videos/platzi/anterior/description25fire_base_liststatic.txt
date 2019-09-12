@@ -1,0 +1,70 @@
+Lista que tiene avatares varios renglones y mas
+
+/home.html
+<ion-content>
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="img/slimer.png">
+        </ion-avatar>
+        <h2>Slimer</h2>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="primary">
+          <ion-icon name="text"></ion-icon>
+          Text
+        </button>
+        <button ion-button color="secondary">
+          <ion-icon name="call"></ion-icon>
+          Call
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+          <ion-icon name="mail"></ion-icon>
+          Email
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+Multi-line List utilizado porque esto es generado para varias listas tener cada record puede tener varias listas
+
+<ion-list>
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="img/avatar-finn.png">
+    </ion-avatar>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up dat. If we just...</p>
+  </ion-item>
+</ion-list>
+
+Esto se puede hacer varias veces simplemente copiando y pegando codigo cuantas veces desees pero mejor usar en la primera lista lo demas borrar, con la directiva *ngfor=""
+
+<ion-list>
+  <ion-item *ngFor="let lugar of lugares">
+    <ion-avatar item-start>
+      <img src="img/avatar-finn.png">
+    </ion-avatar>
+    <h2>{{lugar.nombre}}</h2>
+    <h3>{{lugar.direccion}}</h3>
+    <p>{{lugar.categoria}}</p>
+  </ion-item>
+</ion-list>
+
+/home.ts
+
+export class HomePage {
+  lugares: any = [
+    {nombre: 'Lugar 1', image: '../../img/a_moon_shaped_pool1.jpg', direccion: 'Direccion 1', categoria: 'Categoria1' }
+    {nombre: 'Lugar 2', image: '../../img/kid_a_one.jpg', direccion: 'Direccion 2', categoria: 'Categoria2' }
+    {nombre: 'Lugar 3', image: '../../img/reckoner.jpg', direccion: 'Direccion 3', categoria: 'Categoria3' }
+  ]
+}
+
+Para hacer despegables se deberia usa fablist
+

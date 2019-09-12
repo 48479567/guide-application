@@ -1,0 +1,16 @@
+{
+  "name": "modulos_es_6_en_node",
+  "version": "1.0.0",
+  "description": "Implementar módulos +ES6 en Node",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel-node app.js"
+  },
+  "author": "Sergio Espinoza <48479567.sjep@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
+  }
+}

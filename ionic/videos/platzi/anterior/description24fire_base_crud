@@ -1,0 +1,60 @@
+Anteriormente se vio como se hace la implementacion de  firebase y angularfire2(esto para poder acceder a los datos) para la conexion respectiva.
+
+Ahora lo que se va a hacer una serie de funcionalidades o pieza de codigo para poder acceder a esos datos, tanto para leer los lugares y CRUD, para ello se implementa los servicios esto de forma en otro archivo para poder tener codigo ordenado.
+
+Cuando se desea actualizar el codigo o hacer algun cambio solo se tiene que actuar en ese Servicio para agregar algo o eliminar algo.
+Esto es inyectable para poder usarlo, para mas de una vista simplemente se inyecta ese codigo para ahorrar el trabajo y no repetir codigo. E implementar las operaciones crud que se desee.
+
+en src/ crear la carpeta services
+
+src/services   crear el archivo lugares.service.ts son lugares por que accede a los lugares, otro para usuarios y para comentarios.
+
+Esto en apoyo de la libreria de angular firedatabae, como va a ser inyectable hacer lo siguiente @Injectable()
+
+    // Para ello se usa el objeto para que traer una lista del nodo lugares para poder no solo acceder sino retornarlo poner return
+    //Esto te devuelve un string de informacion o una promesa segun el tipo de informacion que se accede, 
+    //Se establece una conexion para ver si hay cambios de otra aplicacion y esto se ve de forma directa en el propio app
+
+/lugares.service.ts
+
+import {AngularFireDatabase} from 'angularfire2/database';
+
+
+@Injectable()
+export class LugaresService {
+  //Estructura
+  constructor(public afDB: AngularFireDatabase) {
+
+  }
+  public getLugares() {
+    return this.afDB.list(pathOrRef: '/lugares/');
+  }
+  public getLugar(id) {
+    return this.afDB.object(pathOrRef: '/lugares/' + id);
+  }
+  public createLugar(lugar) {
+    //Para tomas una referencia de base de datos de lugares referenciando un nodo de un id de lugar, en caso de que no exista crea un nodo con la inicial del lugar
+    return this.afDB.database.ref(path:'lugares'+lugar.id).set(place);
+  }
+
+  // como el id ya existe lo actualiza.
+  public editLugar(lugar) {
+    return this.afDB.database.ref(path: '/lugares/' + lugar.id).set(place);
+  }
+  public deleteLugar(lugar){
+    return this.afDB.database.ref(path:'/lugares/' + lugar.id).remove()
+  }
+}
+
+
+El segundo metodo es solo con el id
+El tercero crear lugar con el parametro, el metodo lo pone en la base de datos. 
+
+En la siguiente clase se va a crear una interfaz para ver todos los lugares solo de forma estatica.
+
+
+/// avanced para obtener nodos en especifico en la informacion
+
+getDatosEspecifico(identificador: string) {
+  this.afDB.database.ref(path: '/nodo/', ref=>ref.orderByChild('nodoFiltro').equalTo(identificador));
+}

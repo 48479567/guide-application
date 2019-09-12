@@ -1,0 +1,1 @@
+//JSON, notacion de objetos en javascriopt, es un estandar pseudolenguaje, entre backend y frontend

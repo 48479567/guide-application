@@ -1,0 +1,17 @@
+Realmente esto sirve para editar algun lugar o hacer checking y automaticamente la app te regresa a la parte anterior.
+
+/lugar.html
+
+<button ion-button color="dark" (click)="navigateBack()">Regresar</button>
+
+/lugar.ts
+
+ionViewLoad()
+  console.log('ionViewLoad LugarPage');
+navigateBack() {
+  //Entonces el pop saka de la pantalla a este y pone de manifiesto al anterior lugar
+  this.navCtrl.pop();
+}
+
+// Esto se puede hacer de forma automatica.
+// Despues se puede hacer esto desde raiz.

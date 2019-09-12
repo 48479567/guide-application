@@ -1,0 +1,82 @@
+Para ello debemos crear un proyecto en firebase.google.com
+
+go to console
+add project
+
+nombre: ionicBasicPlatzi
+region: donde se va a usar.
+
+esto nos da acceso a la base de datos, hosting, a messaging y lo demas explicado.
+
+y tenemos nuestro panel de control.
+*** 
+</>  
+*** Add Firebase to your web app
+
+revisamos algunas variables que esta relacionado con angular fire2
+
+firebase ya te da scripts que te conectan a la base de datos
+angular-fire2 te da la forma de conectarte a firebase
+promise-polyfill: esto para que firebase funcione correctamente una vez que llamamos a sus funcionalidades.
+
+_command:
+npm install angularfire2 firebase promise-polyfill --save
+
+Entonces despues de instalar, ver la guia y hacer el setup, empezar con la constante que tiene la configuracion de firebase.
+
+export const firebaseConfig = {
+  apiKey: "xxxxxxxxxx",
+  authDomain: "your-domain-name.firebaseapp.com",
+  databaseURL: "https://your-domain-name.firebaseio.com",
+  storageBucket: "your-domain-name.appspot.com,
+  messagingSenderId: '<your-messaging-sender-id>'
+};
+
+
+/src/app/app.module.ts
+
+
+import...
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyA1sto17aQjvzHJcS0yBe-TjcM8_8GraEQ",
+  authDomain: "ionicbasicplatzi-9ca95.firebaseapp.com",
+  databaseURL: "https://ionicbasicplatzi-9ca95.firebaseio.com",
+  projectId: "ionicbasicplatzi-9ca95",
+  storageBucket: "ionicbasicplatzi-9ca95.appspot.com",
+  messagingSenderId: "436746482486"
+};
+
+Esto parece familiar, los valor que tienen cada variable y eso cambiar por la que tiene firebase.
+
+*** 
+</>  
+*** Add Firebase to your web app
+
+de ahi se pone en el codigo que 
+
+Ya esta configurada ya sabe a que base de datos apuntar, en imports va a esta visible en import.
+
+/src/app/app.module.ts
+
+imports: [
+  ...
+  AngularFireModule.initializeApp(firebaseConfig),
+  AngularFireDatabaseModule,
+  AngularFireAuthModule
+]
+
+Antes de ello importar todos los modulos que se esta copiando,
+
+import {AngularFireDatabaseModule} from 'angularfire2/database-deprecreated';
+para aplicaciones anteriores y firebase para compatibilidad, esto cambiar por.
+
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+
+Despues de todos los import
+/app.module.ts
+ ..
+
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireModule} from 'angularfire2';

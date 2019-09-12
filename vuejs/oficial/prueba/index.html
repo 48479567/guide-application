@@ -1,0 +1,12 @@
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<div id="input">
+ <textarea id="ing" cols="30" rows="10" placeholder="Ingresa Codigo" v-model="codigo"></textarea> 
+ <button type="submit" @click="mostrar">Ejecutar</button>
+</div>
+
+<div id="muestra">
+  <span v-html="muestra">    
+  </span>
+</div>
+
+<script src="./scripts.js"></script>

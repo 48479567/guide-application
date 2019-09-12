@@ -1,0 +1,8 @@
+El intermediario o revelador de versiones webview es como un navegador, por ello el uso de las tecnologías web como css html y ts a js.
+recursos que pueden ser imagenes audio. Javascript. Javascript bridge, esto es propuesto por ionic, y de ahi es donde sale el hybrid app framework, en este caso es cordova que tiene un api expuesto para la conexion con el hardware. 
+
+Las ventajas son el tiempo para ganar.
+Desventajas es que genera latencia por su proceso de intermediario para compilar tanto para android como para ios, pero no es tanto. 
+
+en la Siguiente clase se va a ver la estructura del proyecto
+

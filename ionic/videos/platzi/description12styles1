@@ -1,0 +1,306 @@
+/assets/img
+/assets/sound
+
+1)
+y los archivos de imagenes y sonidos cargar
+Esto ya para darles estilos a la aplicacion. 
+/1)
+
+
+2) Volver a login como la vista por defecto:
+
+/app.module.ts
+//Esto directamente esta cargando el app.component
+....
+entryComponents: [
+  MyApp,
+  ...
+]
+
+/app.component.ts
+....
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
+  rootPage: any = LoginPage;
+}
+
+/2)
+
+3)
+
+/login.html
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundPlatzinger bposy0">
+  <div id="avatarLogin">
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <div class="avatarFrameOffLine">
+          <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Nick</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Repetir</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Status</ion-label>
+      <ion-select>
+        <ion-option value="online">Conectado</ion-option>
+        <ion-option value="away">Ausente</ion-option>
+        <ion-option value="busy">Ocupado</ion-option>
+        <ion-option value="appear_offline">Desconectado</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+//Para una mejor interaccion utilizar las clases y el scss.
+
+Clase avatarFrameOffLine: Maneja los estilos segun si esta o no en linea el usuario, como esta en login del inicio se supone que no esta en linea.
+Nota que en la parte de <img> src="" de forma directa ya se correlaciona sin redireccionar con ../../ .
+
+/3)
+
+
+Estilos en la Pantalla de Login
+
+1)
+
+/login.html
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundPlatzinger bposy0">
+  <div id="avatarLogin">
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <div class="avatarFrameOffLine">
+          <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Nick</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Repetir</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Status</ion-label>
+      <ion-select>
+        <ion-option value="online">Conectado</ion-option>
+        <ion-option value="away">Ausente</ion-option>
+        <ion-option value="busy">Ocupado</ion-option>
+        <ion-option value="appear_offline">Desconectado</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <span>Ya tienes Cuenta? Click Aquí</span>
+    <span>Aún no tienes Cuenta? Click Aquí</span>
+    <hr />
+    <button ion-button block>Ingresar</button>
+    <button ion-button block>Registrarse</button>
+  </div>
+</ion-content>
+/1)
+
+
+2) Aplicacion de los estilos globales 
+/app.scss
+  ....
+  bposy0 {
+    background-position-y: 0px !important;
+  }
+  .avatarFrameOffLine {
+    background: #4c4c4c; /* Old browsers */
+    background: -moz-linear-gradient(top, #4c4c4c 0%, #595959 12%, #000000 35%, #474747 44%, #2c2c2c 50%, #111111 60%, #000000 64%, #666666 64%, #474747 80%, #1c1c1c 91%, #2b2b2b 94%, #2b2b2b 94%, #131313 99%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #4c4c4c 0%,#595959 12%,#000000 35%,#474747 44%,#2c2c2c 50%,#111111 60%,#000000 64%,#666666 64%,#474747 80%,#1c1c1c 91%,#2b2b2b 94%,#2b2b2b 94%,#131313 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #4c4c4c 0%,#595959 12%,#000000 35%,#474747 44%,#2c2c2c 50%,#111111 60%,#000000 64%,#666666 64%,#474747 80%,#1c1c1c 91%,#2b2b2b 94%,#2b2b2b 94%,#131313 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+    padding: 6%;
+    border-radius : 5px;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    box-shadow: 3px 3px 21px 1px rgba(0, 0, 0, 0.75);
+    -web-kit-box-shadow: 3px 3px 21px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 21px 1px rgba(0, 0, 0, 0.75);
+  }
+
+  .backgroundPlatzinger {
+    background-image: url(../assets/img/msnbg_tall.jpg);
+    background-size: containt; 
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position-y: 35px;
+  }
+
+/2)
+
+******************
+Ahora se le va a dar estilos para home.
+
+1) /app.component
+  rootPage: any = HomePage
+/1)
+
+2) Agregar amigos, buscarlos, despliegue de la informacion del usuario logeado, 
++++++ion-button start comienzo, end final...
++++++button: icon-only: este boton solo se va a componener de un icono.
+*****Los colores se encuentra en la parte de themes.
+***** src="assets/img/logo_live_add.png" :: Recordar el enrutamiento directo de esta carpeta.
+
+/home.html
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>...
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <img src="assets/img/logo_live_add.png" class="icon-in-button" />
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundPlatzinger">
+<!--En esta parte va informacion sobre el usuario personal-->
+  <ion-grid id="HomeMeContainer">
+    <ion-row>
+      <ion-col col-3>
+        <div class="avatarFrameOffLine">
+          <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid" />
+        </div>
+      </ion-col>
+      <ion-col col-9>
+        Nick <br />
+        <small>Subnick</small> <br />
+        <small><b>correo@platzi.com</b></small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="searchBoxContainer">
+    <ion-input type="text" [(ngModel)]="query" placeholder="Buscar Amigo..."></ion-input>
+  </div>
+
+  <div>
+    <div>
+    <b>Amigos</b>
+    </div>
+    <div class="contact-list-item" *ngFor="let user of users | search: query">
+      <img src="assets/img/logo_live_online.png" class="status" />
+      <b>{{user.name}}</b>
+      <small *ngIf="user.status">{{user.status}}</small>
+    </div>  
+  </div>
+</ion-content>
+
+/2)
+/home.scss
+page-home {
+  #homeMeContainer {
+    border-bottom: 1px solid white;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+    text-shadow: 1px 2px 5px white;
+  }
+  .searchBoxContainer{
+    border: 1px solid #9dd8f4 !important;
+    background: #3bb2ea;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  #searchField {
+    background-color: #ffffffd9;
+    padding: 0px 5px;
+  }
+  .contact-list-item {
+    margin-bottom: 3px;
+    cursor: pointer;
+  }
+  .contact-list-item > .status {
+    width: 20px;
+    margin-right: 15px;
+  }
+}
+1)
+/app.scss
+.icon-in-button {
+  width: 30px;
+}
+
+La copia de las estilos se hizo desde el reposotorio de gitHub en los archivos de app.scss con algunos cambios en los nombres para comodidad del quien sigue este tutorial.
+
+
+
+Despues de ello se hizo el rellenado adecuado de los usuarios en 
+/providers/service-users/services-user.ts
+
+status:Status;
+...
+constructor() {
+  ....
+
+  let usuario: User = {
+    nickName: 'Andrew',
+    age: 28,
+    active: true,
+    status: Status.AppearOffline,
+    email: 'aoe@aoe.aoe',
+    friend: true,
+    uid: 1
+  };
+  ....
+
+}
+
+Tanto en services-user.ts ... home.ts ... conversation.ts se cambio friend por user
+friends por users
+getFriends() por getUsers()
+
+
+
+/login.scss
+  .bposy0 {
+    background-position-y: 0px !important;
+  }
+  #avatarLogin {
+    margin-bottom: 30px;
+  }

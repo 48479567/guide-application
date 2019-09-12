@@ -1,0 +1,19 @@
+_command:
+ionic g page About
+
+/about.html
+//lo que desees
+
+/app.component.ts
+
+this.pages [
+  ...
+  { title: 'About', component: AboutPag
+]
+
+/app.module.ts
+
+import: [
+  ..
+  AboutPageModule
+]

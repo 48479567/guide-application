@@ -1,0 +1,31 @@
+
+<div id="clase">
+  <div v-bind:class="{ active: isActive }"></div>
+  <div class="static" 
+  v-bind:class="{ active: isActive, 'text-danger': hasError }">
+  </div>
+  <!--
+    El Código de arriba renderizado será: <div class="static active"></div>
+    Algo mejor sería:
+    data: {
+      classObject: {
+        active: true,
+      'text-danger': false
+      }
+    }
+  -->
+  <div v-bind:class="classObject"></div>
+  <div v-bind:class="[activeClass, errorClass]"></div>
+  <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+  <!--sintaxis dentro de un valor de objeto-->
+  <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+
+  <!--En esta parte se trabaja con componentes, entonces se require un previo conocimiento de esta seccion.-->
+  <my-component class="baz foo"></my-component>
+  <my-component v-bind:class="{ active: isActive }"></my-component>
+  
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g5_classbinding.js"></script>

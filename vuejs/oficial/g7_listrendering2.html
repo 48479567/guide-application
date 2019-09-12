@@ -1,0 +1,23 @@
+<div id="prueba">
+  <form @submit.prevent="crearItem">
+  <label for="nuevoComponente">Nuevo Componente:</label>
+  <input 
+    v-model="textoComponente"
+    id="nuevoComponente"
+  /> {{ textoComponente }}
+  <button>Crear</button>
+  </form>
+  <ul>
+    <li
+      is="lista_con_boton"
+      v-for="(vista, index) in arrayPrueba"
+      :key="vista.id"
+      :nombre="vista.nombre"
+      :id="vista.id"
+      @remove="arrayPrueba.splice(index, 1)"
+    ></li>
+  </ul>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="./g7_listrendering2.js"></script>

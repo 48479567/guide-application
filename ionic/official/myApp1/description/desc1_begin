@@ -1,0 +1,8 @@
+Pruebas de uso de Ionic 4.
+En primer lugar para el funcionamiento se hace el proceso de enrutamiento.
+
+_command:
+ionic start myApp1 sidemenu
+cd myApp1
+ionic g page Pruebas-html
+

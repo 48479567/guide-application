@@ -1,0 +1,41 @@
+// node app3.js
+// Inicio
+// Fin
+// Dos
+// Tres
+// Uno
+
+// esto es extraño por que se ejecuto Inicio y tan solo despues Fin, node trabaja de forma diferente con los ciclos de eventos::: single tree well
+
+
+
+
+// Un subproceso es el encargado de guardar variables en memoria, funciones, ejecutar peticiones asincronas como callback o promesas, api externo en la espera del servidor via fetch, ajax o websockets primero lo manda a la pila de proceso despues a la de subprocesos y despues se va a la pila de callbacks y esto es lo que lo ejecuta.
+// La pila de subproceso es el que almacena en la espera de alguna funcion en particular,
+// La pila de callback, la respuesta que se espera asincronamente y lo regresa.
+
+// :::))   node app3.js
+//  inicio
+//  fin
+//  dos
+//  tres
+//  uno
+
+Single Thread
+
+//Pila de Procesos (Requets & Responses), todo lo que es sincrono.
+//Pila de Subprocesos: Peticiones asincronas que necesitan la respuesta de un api, base de datos.
+//Cola de Callbacks: Pila de callbacks, respuestas asincronas de lo que dio el callback
+
+
+
+// De un solo hilo de node  que dispara a atraves de una callback cuando esta listo, ejm consultas de base de datos y otros.
+
+
+
+Blockeante y no Blockeante esto en el ejemplo app3.js
+en casos si hay necesidad de hacer de forma bloqueante, forma sucesiva, ejemplo restaurante,
+El mesero limpia mesa, da la orden, da nota de pago, pregunta sobre los platillos, esto sin esperar.
+El comensal come de forma sincrona, bloqueante.
+
+https://github.com/jonmircha/edfullstackjs-2018.git

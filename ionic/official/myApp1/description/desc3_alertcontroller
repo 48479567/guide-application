@@ -1,0 +1,121 @@
+Ahora el alertController se denota de una forma diferente
+
+@1: Aumentar Boton con una llamada de Function:
+  /pruebas-html.page.html
+
+    <ion-content padding>
+      <ion-button (click)="mostrar()">Presionr</ion-button>
+      ...
+
+@2: Denotar Funcion mostrar con alertController
+
+  /pruebas-html.page
+  ...
+  constructor(private alertCtrl: AlertController) { }
+
+  ...
+  async mostrar() {
+    const mostrar = await this.alertCtrl.create({
+      header: 'Muestra',
+      subHeader: 'Description Muestra',
+      message: 'Mensaje Enviado',
+      buttons: ['Aceptar']
+    });
+    return await mostrar.present();
+  }
+  // Esto te muestra de una forma asincrona como funciona cuando se presiona el boton, y las propiedades son diferentes del alertController.
+
+@3 Aumentar Funciones y exteriorizar el alert controller.
+
+  /customs/alertCustom
+
+    @Injectable()
+
+    export class AlertCustom() {
+      constructor(
+        private alertCtrl: AlertController
+      ) { }
+    asyn AlertAcept(
+      header: string,
+      subHeader: string,
+      message: string,
+      buttons: string) {
+      const acept = await this.alertCtrl.create({
+        header,
+        subHeader,
+        message,
+        buttons: [buttons]
+      });
+      return await acept.present();
+      }
+    }
+
+!1 No olvidar las importaciones
+!2 Para el funcionamiento se tiene que hacer el llamado por medio de providers en app.module
+
+/app.module
+
+  .....
+  providers: [
+    ...,
+    AlertCustom
+  ]
+
+/pruebas-html.page.ts
+  ...
+  constructor(
+    //Borrar public alertCtrl: AlertController
+    public alertCustom: AlertCustom
+  ) {}
+  ...
+  async mostrar() {
+    return await this.alertCustom.AlertAcept(
+      'Muestra',
+      'Muestra SubHeader',
+      'Mensaje Muestra',
+      'Aceptar'
+    );
+  }
+
+  //Esto puede resultar repetitivo pero el manejo de funciones al momento de hacer click es la cuestion.
+
+  Como se denota las propiedades de la funcion no son necesarias por ello cambiar asi.
+
+  /customs/alert.custom.ts
+  ...
+  async AlertAcept(
+    header?: string,
+    subHeader?: string,
+    message?: string,
+    buttons?: string) {
+    const acept = await this.alertCtrl.create({
+      header,
+      subHeader,
+      message,
+      buttons: [buttons]
+    });
+    return await acept.present();
+  }
+
+!3 "Un parametro obligatorio no puede seguir a un parametro opcional", para ello ordenar adecuadamente
+
+//Ademas se puede manejar con un queryselector
+  async function presentAlert() {
+    const alertController = document.querySelector('ion-alert-controller');
+    await alertController.componentOnReady();
+
+    const alert = await alertController.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+    return await alert.present();
+  }
+
+/(url): https://ionicframework.com/docs/api/alert
+
+Ademas se puede implementar un forma de seleccion fuera de un formulario, o con el llamado a una funcion.
+
+***ion-action-sheet****
+https://ionicframework.com/docs/api/action-sheet

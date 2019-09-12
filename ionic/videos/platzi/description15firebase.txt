@@ -1,0 +1,15 @@
+Antes de ello se tiene que saber que se uso un servicio para la obtencion de forma manual a los usuarios. Para ver los cambios que se hacen se tiene una base de datos en la nube para ver en forma real los cambios y directrices que se hace.
+Que es FireBase? Es un backend como servicio, que tiene ya ciertas configuraciones, que mas se parece a mongodb en vez de sql.
+
+/Firebase.google.com
+Go to Console.
+AddProject
+
+  Nombre del Proyecto: Platzinger
+  Ubicacion: Segun donde va a funcionar el app.
+<<<Crear Project>>>
+
+***</> Project OverView: Ahi se ve el forma de conexion a la base de datos.
+
+
+Reemplazo al servicio de usuarios por un servicio dinamico con Conexion a Firebase.

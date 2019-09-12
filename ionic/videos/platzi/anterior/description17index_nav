@@ -1,0 +1,55 @@
+En esta parte se hace el regreso al inicio puede ser denotado por ti mismo o por defecto en el proyecto.
+
+Se ve en este archivo que se le asigna una raiz a cada uno de ellos, esto quiere [root] esto es la primera pagina de nuestro stack no hay otra detras esto desde donde puedes partir y hasta donde puede llegar
+
+navegacion hacia raiz y navegaciones desde delante y detras 
+
+/tabs.html
+
+_comando:
+
+ionic generate page Tercera  || ionic g page Tercera
+
+desde fit a lugares y despues a Tercera
+
+agregamos a app.module.ts
+
+/app.module.ts
+
+@NgModule({
+  declaration: [
+    TerceraPage
+  ]
+
+  entryComponents: [
+    TerceraPage
+  ]
+})
+
+/lugar.html
+<button ion-button color="dark" (click)="navigateToThird()">Navegar a Tercera</button>
+
+/lugar.ts
+ionViewLoad() {
+  console.log('ionViewLoad LugarPage');
+}
+
+navigateToThird() {
+  this.navCtrl.push(TerceraPage);
+}
+
+Quiero Navegar hasta el feed directamente. Puede ser con un boton para navegar a home, pero esto lo que hace es apilar.
+
+HomePage con el boton en la tercera vista puede generar errores.
+Tenemos el home pero cuidado tenemos que hacer el import. Esto nos genera el boton back. El boton de back no deberia existir en root, lo que hace es llenar el stack de vistas.
+
+Generas una navegacion complicada.
+
+/tercera.html
+<button ion-button color="dark" (click)="setRootToHome()>Ir a Home como Root</button>
+
+/tercera.ts
+setRootToHome() {
+  this.navCtrl.setRoot() //Colocar el root al stack de navegacion y tambien llevarte hasta alla.
+}
+

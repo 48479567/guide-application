@@ -1,0 +1,3 @@
+/* Document es una variable globar que reemplaza todos los componentes
+
+*/

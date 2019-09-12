@@ -1,0 +1,23 @@
+.Playlist {
+  overflow-x: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+  padding-bottom: 75px;
+}
+
+.Playlist::-webkit-scrollbar {
+  width: 3px;
+  height: 8px;
+}
+
+.Playlist::-webkit-scrollbar-thumb {
+  background: rgba(125,125,52);
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.Playlist::-webkit-scrollbar-thumb:hover {
+  visibility: visible;
+}
+
+

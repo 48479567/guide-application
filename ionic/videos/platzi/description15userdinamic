@@ -1,0 +1,344 @@
+Despues de agregar el proyecto.
+
+AngularFire2******
+Esto es para el amolde con firebase y angular.
+Firebae**** Esto como package de npm, esto es una libreria js para el manejo de la base de datos. 
+PromisePolyfill, esto para que firebase y las consultas funcionen de manera adecuada.
+
+_command:
+npm install angularfire2 firedatabase promise-polyfill --save
+
+Esto depende la banda ancha de tu red.
+
+Aqui se ve como se ve el setup de ngmodel y otros. Copiar la configuracion de firebase en el siguiente archivo. Esto de lo que provee overview de firebase. Solo la parte de los elementos internos del objeto de configuracion
+
+/app.module.ts
+import ...
+
+export const firebaseConfig = {
+  apiKey: ...,
+  authDomain:...,
+  databaseURL:...,
+  projectId:...,
+  storageBucket:...,
+  messagingSenderId:...
+}
+
+//Las importaciones como el primero que obtiene el objeto de configuracion.
+import: [
+  ...,
+  AngularFireModule.initializeApp(firebaseConfig),
+  AngularFireDatabaseModule,
+  AngularFireAuthModule
+]
+
+
+//No olvidar las importaciones que se hace, como import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+
+//O se puede aumentar en este path ultimo el '-deprecated' para versiones anteriores, que ya no se usa.
+
+*******Authentificacion con email y password
+
+***//firedatabase
+authentificacion
+
+sigInMethod, despues habilitar el primer switch del EmailPassword. ++Save
+A diferencia de otros servicios se tiene que inyectar un objeto para hacer la conexion con firebase. (a)
+
+Ahorita se esta usando angularfire2 pero firebase tiene conexion con varios frameworks como react, vue hasts php, con cualquier libreria que puedes hacer uso de js, y con la interface de API rest que puedes hacer con cualquier lenguaje que user http, o sea firebase funciona con cualquiera.  
+
+****---- Una promesa es una forma asincrona de maneja el flujo de procedimiento de un programa, cuando esta listo ese objeto el flujo normal inmediatamente atiende a ese objeto segun si hay algun metodo o no, devuelve un objeto (resolutor, nulo, error) y que puede manejarse cuando esta listo.
+
+/services/authentication.ts
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth'; //(a) 
+
+@Injectable();
+
+export class AuntheticationService {
+  
+  //Este objeto de angularFireAuth tiene los metodos de relacion de autentificacion para el ingreso a firebase. 
+  constructor(private angularFireAuth: AngularFireAuth) { }
+
+// Este ultimo (signInWithEmailAndPassword) regresa una promesa, esto es un objeto resolutor, de nulo o error que cuando este listo se tiene una funcionalidad lista para usarlo. Para ello se tiene que retornarla para que la funcion loginWithEmail pueda usarla. 
+
+  loginwithEmail(email: string, password: string) {
+    return this.angularFireAuth.auth.signInWithEmailPassword(email, password);
+
+  registerwithEmail(email: string, password: string) {
+    return this.angularFireAuth.auth.createUserWithEmailPassword(email, password);
+    }
+    //Esto recupera la informacion del usuario logeado. Esto para el permiso del manejo de la pp. 
+    getStatus() {
+      //Esto es en cada estado en que este el usuario.
+      return this.angularFireAuth.authState;
+    }
+    Logout() {
+      return this.FireAuth.auth.signOut();
+    }
+  }
+
+Despues esto se tiene que implementar en la pantalla de Login.
+
+/login.ts
+export class LoginPage {
+  email: string = null;
+  password: string = null;
+
+  constructor(private auntheticationService: AuntheticationService, alertCtrl: AlertController) {
+
+  }
+
+  ngOnInit() {
+
+  }
+
+  login() {
+    //Como se ve esto te regresa una promesa, para ello se resuelve cuando esta lista.
+    this.auntheticationService.loginWithEmail(this.email, this. password).then((data) => {
+      const loginSuccess = this.alertCtrl.create(
+        {
+          title: 'Éxito',
+          message: 'Ingreso Correcto',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log(data);
+              }
+            }
+          ]
+        }
+      );
+      loginSuccess.present();
+    }).catch((error) => {
+      const loginError = this.alertCtrl.create(
+        {
+          title: 'Error',
+          message: 'Error en el Login',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log(error);
+              }
+            }
+          ]
+        }
+      );
+      loginError.present();
+    });
+  }
+  register() {
+    //Como se ve esto te regresa una promesa, para ello se resuelve cuando esta lista.
+    this.auntheticationService.registerWithEmail(this.email, this. password).then((data) => {
+      const registerSuccess = this.alertCtrl.create(
+        {
+          title: 'Éxito',
+          message: 'Registro Correcto',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log(data);
+              }
+            }
+          ]
+        }
+      );
+      registerSuccess.present();
+    }).catch((error) => {
+      const registerError = this.alertCtrl.create(
+        {
+          title: 'Error',
+          message: 'Error en el Regitro',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                console.log(error);
+              }
+            }
+          ]
+        }
+      );
+      registerError.present();
+    });
+  }
+
+}
+
+/login.html
+
+input [(ngModel)]="email" 
+input [(ngModel)]="pasword" 
+
+button (click)="login()"
+button (click)="register()"
+
+************************************************************
+// en la parte de registro exitoso se denota un uid que se va a usar para cada usuario en particular, ademas firebase para la autentificacion aumenta una guia para los filtros de ingreso de usuario.
+
+//En ese capitulo se va a ver el acceso de datos para poder ingresar. 
+//Para ello es recomendable crear servicios aparte para que nuestro codigo sea de forma ordenada.
+// Hasta este ultimo solo se maneja con email y password, sin tocar las demas funcionalidades.
+//Ahora lo que se hace es recuperar el uid que se denota en el data.
+
+
+/services/user.ts
+
+Lo que se va a hacer es la relacionante de la base de datos.
+Esto con los datos agregados con anterioridad. Para
+
+/user.service.ts
+
+Entonces para ello se va a cambiar en la parte de los servicios estaticos por algo mas dinamico. 
+
+let usuario1 = {
+  ...
+};
+
+...
+this.users = [usuario1, ...];
+}
+
+/user.service.ts
+
+import ...
+
+@Injectable()
+
+export class UserServiceProvider {
+  constructor(private angularFireDatabase: AngularFireDatabase) { }
+    // Este metodo se va a conectar a la base de datos de firebase y traer lo que hay de algun nodo. No confundir con el AngularFireDatabaseModule, esto es para inyectar en el app.module y proveer de muchas funcionalidades y AngularFireDatabase, es para la conexion con firebase.
+    getUsers() {
+      return this.angularFireDatabase.list('/users');
+      //localizacion del nodo(JSON) como url, tiene que ser exacto el nodo de localizacion. Si el nodo no existe se crea primero el nodo y el usuario se pone despues. En esa confuracion firebase es de ayuda. Ademas se pone return por que esto es un observable que notifica a la app si hay algun cambio. 
+    }
+    getUsersById(uid) {
+      return this.angularFireDatabase.object(`/users/${uid}`);
+    }
+    // Esto ya es despues del registro que se cargara a la base de datos firebase.
+    createUser(user) {
+      return this.angularFireDatabase.object(`/users/${user.uid`).set(user);
+      // Despues de ahi como esta solo email y password ya se ingresa la informacion completa del usuario.
+    }
+    // Esto es lo mismo que la creacion de user.
+    editUser(user) {
+      return this.angularFireDatabase.object(`/users/${user.uid}`).set(user);
+    }
+  }
+}
+
+// Ahora en user.component esto se va a mostrar getUsers(), para poder llamar a create user al momento de registrar.
+
+/login.ts
+
+nick: string = ''; //Puede ser tambien null
+
+
+Nick:  input  [(ngModel)]="nick"
+
+... constructor(userService: UserServiceProvider) {
+
+}
+
+register() {
+  this.auntheticationService.registerWithEmail(this.email, this.password).then((data) => {
+    const user = {
+      uid: data.user.uid;
+      email: this.email,
+      nick: this.nick,
+
+    };
+    this.userService.createUser(user).then((data1) => {
+      let mostrar = () => console.log(data1)
+      this.alertCustom.alertAcept('..params, mostrar');
+    }).catch((error) => {
+      let mostrar = () => console.log(error);
+      this.alertCustom.alertAcept('..params, mostar');
+    });
+  })
+
+}
+
+
+// Ya con esos borrar los usuarios que se crearon vaciamente.
+//Despues de ello ir a database para escoger el tipo de datos que se va a utilizar.
+CreateDatabase
+(.)Start in test mode   |Enable| 
+Esto te da opcion de usar el Cloud Firestore(Que esta en Beta, esto no es recomendable) cambiar, a Realtime Database.
+
+En la parte de _|Rules|_ cambiar tanto read como write a true (Esto es solo por caso de testeo, porque en produccion no es recomendable).
+
+{
+  "rules": {
+    "read": true,
+    "write": true
+  }
+}
+
+|Publish|
+
+Entonces ya es momento de hacer la prueba. 
+
+Con esto ya se crea los nodos, en la base de datos (users), ni no existe el nodo no genera error mas bien lo crea y ahi lo pone.
+La informacion como el correo el nick y el uid se guardan mas la contraseña es trabajo de los correos de firebase, esto por motivos de seguridad.
+
+***
+Cuando hay un login existoso mandar directamente a la pantalla de home. Se usa un router o una funcion de navCtrl 
+
+/login.ts
+
+constructor(.., private router: Router) // esto es en las ultimas versiones.
+constructor(.., private navCtrl: NavController) // Esto es lo usado.
+
+login() {
+  ...
+  this.router.navigate('home'); // Esto se ve cuando se ve en app.module.test
+  /app.module.ts
+  ...
+  {path: 'home', component: HomeComponent},
+  ...
+  // Todo ello es de forma provisional, lo que normalmente se usaria es:
+  this.navCtrl.push(HomePage); // O de forma segura se puede hacer como index a otra pagina asi.
+  this.navCtrl.setRoot(HomePage);
+}
+
+--/Al momento de hacer funcionar posiblemente se denote un error, esto podria ser por el nombre de la funcion getter, entonces verificando y cambiando se procede a implementar los datos cargados del login hacia el home.ts esto ya de forma dinamica y directamente con escuchas a los cambios.
+
+export class HomePage {
+  users: Users[];
+  query: string = '';
+  constructor (private userService: UserServiceProvider) {
+    this.users = this.userService.getUsers().valueChanges()
+      .subscribe(() => {}, (error) => {
+        console.log(error);
+      });
+      Despues al comienzo de este se borrar this.users porque lo que se esta ejecutando es un observable. Quedaria asi:
+    this.userService.getUsers().valueChanges()
+      .subscribe((data) => {
+        this.users = data;
+      }, (error) => {
+        console.log(error);
+      });
+      // Cuando se gestiona el data para la relacion e insercion en users mandara un error, por el tipo que se usa, entonces para ello se tiene que hacer que data utilice esa misma estructura asi:
+      this.userService.getUsers().valueChanges()
+        .subscribe((data: User[]) => {
+          this.users = data;
+          
+        })
+  }
+}
+
+***///Para el manejo de errores de versiones hacer lo siguiente.
+TypeError: Object(...) is not a function
+
+_command:
+
+npm install rxjs@6 rxjs-compat@6 angularfire2@5.0.0-rc.11 --save
+
+"rxjs": "5.5.7" por si persisten los errores.
+angularfire2 "^5.0.0-rc.3"

@@ -1,0 +1,149 @@
+Con la version 6 de angular se hizo el platzinger en web y escritorio. Entonces como ionic como esta basado en angular se llama de la misma. 
+
+Tipos de Datos
+// para asignar la memoria adecuada nace typescript 
+// Let variable; es con scope donde ocupa memoria. y se pasa la memoria donde no deberia tomar. 
+
+Interface:
+Con any puede estar disponible huecos en la implementacion de su uso, es por ello por la que estan las interfaces, un nuevo tipo que tu personalizas. Y de ahi tu dictas que tipo que propiedad que tiene. Esto es una clase.
+
+/app/interfaces
+
+interfaces/user.ts
+  export interface User {
+    //Caracteristica
+    nickName: string;
+    subNick: string;
+    edad: number;
+    email: string;
+    friend: boolean;
+    uid: any;
+  };
+
+//Esto simplement se puede usar
+
+//home.component.ts
+
+constructor() {
+  let myUser: User = {
+    nick: 'Edu';
+    subNick: 'Hola!';
+    age: 28;
+    email: 'aoe@aoe.aoe';
+    friend: true;
+    uid: 1;
+  };
+  console.log(myUser);
+}
+
+//Las interfaces son estrictas en algun modo para ello se pone el simbolo de ? para que no sean estrictas en 
+/interfaces/user.ts
+
+export interface User {
+  nickName: string;
+  subNick?: string;
+  edad?: number;
+  email: string;
+  friend: boolean;
+  uid: any;
+}
+
+Entonces no pasa nada si pones asi constructor de home.component.ts
+
+constructor() {
+  let myUser: User = {
+    nick: 'Edu';
+    age: 28;
+    email: 'aoe@aoe.aoe';
+    friend: true;
+    uid: 1;
+  };
+  // Se tiene intefaces para crear objetos simples tambien se usa para crear arrays, tipo User que permite tipos de datos listado en esta interface
+  let users: User[] = [
+    myUser,
+  ];
+
+  Las interfaces ayudan a tener nuestro entorno mas limpio sin dejar la parte estricta
+
+
+  console.log(myUser);
+}
+
+Con la interface de Usuario: 5 usuarios.
+
+Es meterlo en un arreglo. y despues recorrerlo en mi home.component.html y esto es una propiedad global de la clase que se pone encima de constructor sin la declaracion de let y const para que este visible en la parte del archivo html. 
+
+friends: User[];
+constructor() {
+  let usuario1: User = {
+    nick: 'Eduardo',
+    age: 28,
+    email: 'ed@aoe.aoe',
+    friend: true,
+    uid: 1
+  };
+  let usuario2: User = {
+    nick: 'Nick2',
+    age: 29,
+    email: 'ed@aoe.aoe',
+    friend: true,
+    uid: 2
+  };
+  let usuario3: User = {
+    nick: 'Nick3',
+    age: 32,
+    email: 'ed3@aoe.aoe',
+    friend: false,
+    uid: 3
+  };
+  let usuario4: User = {
+    nick: 'Nick4',
+    age: 38,
+    email: 'ed4@aoe.aoe',
+    friend: true,
+    uid: 4
+  };
+  let usuario5: User = {
+    nick: 'Nick5',
+    age: 35,
+    email: 'ed5@aoe.aoe',
+    friend: false,
+    uid: 5
+  };
+  this.friends = [usuario1, usuario2, usuario4, usuario5];
+}
+
+//Las directivas estructurales comienzan con un *, estas son las que afectan al documento html, agrega elimina, modifica un elemento html. Son directivas estructurales.
+/home.component.html
+<p *ngFor="let user of friends; let i = index">
+  {{i}} . {{user.nick}} - {{user.email}} 
+</p>
+
+En la parte de declaracion de interfaces se pone al final de cada propiedad ";", en cambio en el uso se pone ",".
+
+// En la parte de ngFor te crea por cada iteracion un index
+
+
+*ngIf: Esto no es como la propiedad de css, ayuda con la seguridad.
+
+<p *ngIf="true" *ngFor="let user of friends; let i = index">
+  {{i}} . {{user.nick}} - {{user.email}} 
+</p>
+
+.Esto marca un error que te dice que no se puede tener varias directivas con * en un elemento. Esto asi se arregla.
+
+<ng-container *ngFor="let user of friends; let i = index">
+  <p *ngIf="user.friend">
+    {{i}} . {{user.nick}} - {{user.email}}
+  </p>
+</ng-container>
+
+Esto si no te muestra error.
+
+// Esto te muestra los que solo son amigos
+
+<ng-container *ngFor="let user of friends; let i = index">
+  <p *ngIf="!user.friend">
+    {{i}} . {{user.nick}} - {{user.email}}
+  </p>
+</ng-container>

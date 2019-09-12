@@ -1,0 +1,155 @@
+En esta parte se va a hacer la actualizacion de datos,
+Acceder a ella y mostrar en la lista.
+
+/home.html
+
+
+/lugares.services.ts
+...
+public getLugares() {
+  return this.afDB.list('/lugares/');
+
+
+/home.ts
+borrar el array componente
+}
+lugares: any = [];
+
+  // Esto retorna lista que tiene. Para escuchar los cambios se pone value changes, cada que cambia en el nodo los valores emite un evento firebase que despierta el value changes entonces se asigna a lo que contesta firebase y asignar los cambios a la lista de lugares que se tiene. con .subscribe, y esto retorna los lugares desde firebase. y se le asigna a this.lugares = lugaresFB;
+
+
+constructor( public navCtrl: NavController, public lugaresService: lugaresService) {
+  this.lugaresService.getLugares().valueChanges()
+    .subscribe(next: lugaresFB => {
+      this.lugares = lugaresFB;
+    })
+
+}
+
+
+Cuando ejecuta sale el error Object(...) is not a function
+Esto podria ser por incompatibilidad de versiones, para ello los siguientes comandos pueden ayudar y son.
+__command:
+npm install rxjs@6 rxjs-compat@6 --save
+npm uninstall angularfire2
+npm install angularfire2@5.0.0-rc.3 --save
+npm uninstall firebase
+npm install firebase@4.8.0 --save 
+
+Ahora sale el error Typescript Error ';', esto es mas un error de sintaxis probablemente por que no soporta algunas sintaxis resumidas o de salto de linea que normalmente js si acepta o simplemente su depurador por el sentido estricto no le deja. Para ello arreglar el salo de lina de .subscribe((...)) asi:
+
+export class HomePage {
+  lugares: any = [];
+  
+  constructor(public navCtrl: NavController, public lugaresService: LugaresService) {
+    this.lugaresService.getLugares().valueChanges().subscribe(lugaresFB => {
+      this.lugares = lugaresFB;
+    })
+  }
+}
+
+o asi
+constructor(public navCtrl: NavController, public lugaresService: LugaresService) {
+    this.lugaresService.getLugares().valueChanges().subscribe(
+      lugaresFB => {
+      this.lugares = lugaresFB;
+      }
+    )
+  }
+
+Entonces con ello ya debe estar funcionando correctamente, los cambios que se hace en la base de datos esto se muestra directamente sin necesidad de hacer refresh.
+Para la navegacion a la vista de lugar pasar en la funcion de cada una de las litas de home.html el objeto
+
+/home.html
+goToExistingDetailView(lugar)
+
+/home.ts
+goToExistingDetailView(lugar) {
+  this.navCtrl.push(LugarPage, {lugar: lugar}) 
+}
+
+/lugar.ts
+
+export class LugarPage {
+  lugar: any = {};
+  constructor(public navParams: NavParams, public navCtrl: NavController, public lugaresService: LugaresService) {
+    // Obviar el this porque esto es parametro en navParams
+    this.lugar = navParams.get('lugar');
+  }
+}
+
+Para ello se debe tener lugar a la habilidad para guardar los cambios en lugar.html una vez cargamos. Cuando se carga se nota que se agrega un nuevo dato en la base de datos.
+
+Para ello debemos que hacer que con el id no se genere otro nodo, una solucion simple el siguiente comandos
+
+guardarLugar() {
+  this.lugar.id = this.lugar.id || Date.now();
+  this.lugaresService.createLugar(this.lugar)
+}
+
+O esto puede ser con la logica 
+if (!this.lugar.id) {
+  this.lugar.id = Date.now();
+}
+...
+
+
+Para ello con eso se tiene solamente que quitar la lista con this.navCtrl.pop() y poner un alert si deseas LugarGuardado con exito
+
+guardarLugar() {
+  if (!this.lugar.id) {
+    this.lugar.id = Date.now();
+  }
+  this.lugaresService.createLugar(this.lugar);
+  this.navCtrl.pop();
+  alert('Se Guardo con Exito');
+}
+
+
+Para darle mayor sentido al boton puedes hacer lo siguiente
+
+/lugar.ts
+
+esport class LugarPage {
+  ...
+  botonString: string = '';
+  mensajeGuardado: string = '';
+
+  contructor (...) {
+    ...
+    if (!this.lugar.id) {
+      this.botonString = 'Guardar Lugar';
+      this.mensajeGuardado = 'Se Actualizó el Lugar con Éxito!!';
+    } else {
+      this.botonString = 'Actualizar Lugar';
+      this.mensajeGuardado = 'Se Guardó el Lugar con Éxito!!';
+    }
+  }
+}
+
+
+.....
+guardarLugar() {
+...
+alert(this.mensajeGuardado);
+}
+
+
+En este si solo fuera el objeto asi fuera = {} no esta vacio por ello se trabaja con el id. No olvidar el ; en cada declaracion.
+
+
+/lugar.html
+
+....
+<button ion-button full (click)=guardarLugar()>{{botonString}}</button>
+
+
+Ahora el funcionamiento 
+para la elminiacion.
+
+
+Como aclaracion esta es la mejor opcion
+
+constructor(public navCtrl: NavController, public lugaresService: LugaresService) {
+    this.lugaresService.getLugares().valueChanges().subscribe((lugaresFB) => { this.lugares = lugaresFB;})
+  }

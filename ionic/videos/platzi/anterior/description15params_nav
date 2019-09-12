@@ -1,0 +1,79 @@
+Reto: Agregar un tab de about y poner tus datos ahi.
+
+_comando:
+
+ionic generate page About
+
+
+
+/tabs.html
+
+<ion-tab tabTitle="About" tabIcon="about" [root]="tab3Root"></ion-tab>
+
+/tabs.ts
+
+export class TabsPage {
+  tab3Root = AboutPage;
+}
+
+agregar en declaration y en entrycomponent 
+
+@NgModule({
+declarations: [
+...,
+AboutPage  
+]
+---
+entryComponent: [
+...,
+AboutPage  
+]
+})
+
+
+//// Mandar parametros de navegacion, para ello el destino debe saber de donde se le llamo, con fuerza bruta esto se lograria de forma mas facil pero es de las malas practicas repetitivas.
+
+A la funcion navegarALugar le daremos un parametro
+
+/home.ts
+navegarALugar(name) {
+  this.navCtrl.push(LugarPage);
+}
+
+/home.html
+<button ion-button color="dark" (click)="navegarALugar('Primer Lugar')">Primer Lugar</button>
+<button ion-button color="dark" (click)="navegarALugar('Segundo Lugar')">Segundo Lugar</button>
+
+
+Agregamos el indicador de donde viene esta vista
+
+/lugar.html
+<ion-content padding>
+  {{nombreLugar}}
+</ion-content>
+
+/lugar.ts
+
+Para ello debemos inicializar antes del constructor de la clase de la vista
+export class LugarPage {
+  nombreLugar: string = '';
+}
+
+despues en el mismo archivo hacer en la parte de la funcion en envio con el segundo parametro de navCtrl.push()
+
+navegarALugar(name) {
+  // Ya no se trabaja con params.
+  //this.navCtrl.push(LugarPage, params: {nombre: name})
+  this.navCtrl.push(LugarPage, {nombre: name})
+}
+
+Entonces capturamos el parametro en la siguiente vista esto usando navParams
+
+constructor(public navCtrl: NavController, public navParams: NavParams) {
+  this.nombreLugar = navParams.get('nombre');
+}
+
+En esta parte lo que obtenemos debe coincidir con lo que estamos enviando, en este caso 'nombre'
+
+Por ejemplo ahi que se denote el id de quien llamo, y asi se puede dar uno cuenta de donde vino.
+

@@ -1,0 +1,31 @@
+<script>
+  mxBasePath = 'javascript/src'
+</script>
+<script src="../node_modules/mxgraph/javascript/mxClient.js"></script>
+<script>
+  function main(container) {
+    if (!mxClient.isBrowserSupported()) {
+      mxUtils.error('Navegador incomplatible', 200, false)
+    } else {
+      var root = new mxCell()
+      root.insert(new mxCell())
+      var model = new mxGraphModel(root)
+      var graph = new mxGrah(container, model)
+      //Este codigo hace que el grafico sea solo de vista: graph.setEnabled(false)
+
+      // En esta parte se obtiene el patron determinado para hacer la creacion de celdas, elemento raiz o capa 0
+      var parent = graph.getDefaultParent()
+      //Agrega celdas al model en un solo paso
+      model.beginUpdate()
+      try {
+        var v1 = graph.insertVertex(parent, null, 'Hello', 20, 20, 80, 30)
+        var v2 = graph.insertVertex(parent, null, 'World', 200, 150, 80, 30)
+        var e1 = graph.insertEdge(parent, null, '', v1, v2)
+      } finally {
+        //Actualizar la pantalla
+        model.endUpdate()
+        // El uso de beginUpdate y endUpdate no solo mejora el rendimiento de la pantalla, sino que tambien se usa para marcar los limistes para los cambios que se pueden deshacer / rehacer.
+      }
+    }
+  }
+</script> 

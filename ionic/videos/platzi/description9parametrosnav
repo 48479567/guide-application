@@ -1,0 +1,79 @@
+Navegacion por parametros
+<ng-container *ngFor="let user of friends; let i = index">
+  <div *ngIf="user.friend">
+    <a routerLink="/conversation/{{user.uid}}">
+      {{i}} . {{user.nick}} - {{user.email}}
+    </a>
+  </div>
+</ng-container>
+
+//La navegacion se puede hacer por routerLink ademas se puede enviar parametros
+que se envian a la nueva vista.
+Pero esto muestra un error que no encuentra en la ruta, ya que el router de angular no reconoce la ruta con el numero, entonces para agregarle base de parametros se tiene que modificar en 
+
+/app.module.ts
+
+const appRoutes: Routes = {
+  ...
+  {path: 'conversation/:uid', ...}
+}
+
+// Pero ya no existe coversation asi solo
+
+Para la toma de datos de la ruta angular ofrece un objeto ActivatedRoute
+
+
+/conversation.component.ts
+..
+import {ActivatedRoute} from '@angular/router';
+...
+
+friendId: any;
+constructor(private activatedRoute: ActivatedRoute) {
+  this.friendId = this.activatedRoute.snapshot.params['uid'];
+  console.log(this.friendId);
+}
+
+//snapshot: Esto es un parametro de forma instantanea, como el parametro de ruta.
+
+****
+Accediendo a los Usuarios por su uid
+Para ello existen las solucciones
+
+1) Se obtiene el id y se busca la informacion, esta es la mas rapida. No es la ideal.
+
+2) Para ello se obtiene una sola fuente de datos. Y que esto va a ser replicable.
+
+1)))
+Por cada usuario hacer un copyPaste de home.component.ts hacia conversation.component.ts
+
+/conversation.componet.ts
+
+friendId: any;
+friends: User[];
+friend: User;
+constructor(private activatedRoute: ActivatedRoute) {
+  this.friendId = this.activatedRoute.snapshot.params['uid'];
+  console.log(this.friendId);
+}
+let usuario1: User = {
+  ...
+}; ...
+
+this.friends = [usuario1, ...];
+
+this.friend = this.friends.find((record) => {
+  return record.uid == this.friendId;
+})
+
+console.log(this.friend);
+
+
+Esta es la forma rapida con la busqueda de copia directa de home.module.ts. Esto no es optimo se repiten datos y se gasta memoria. 
+Para ello angular tiene mecanismos a traves de servicios.
+
+
+
+
+
+

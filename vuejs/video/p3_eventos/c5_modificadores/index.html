@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Eventos | Modificadores</title>
+  <script src="../../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="eventos">
+    <div style="height:300px; border:solid 1px green"
+      @mousemove="mostrarCoordenadas"
+      @click.once="sumar(3)">
+      <!--once: una sola vez-->
+      <div style="height:30px;border:blue solid 1px"
+        @mousemove.stop @click.stop></div>
+        <!--stop: detener dentro de su contenido-->
+    </div>
+    x: {{ x }}, y: {{ y }}, contador: {{ contador }}
+  </div>
+  
+  <script src="./main.js"></script>
+</body>
+</html>

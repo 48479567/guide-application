@@ -1,0 +1,51 @@
+<div id="example-1">
+
+  <ul>
+    <li v-for="item in items">
+      {{ item.message }}
+    </li>
+    <br>
+    <!--Esto es con dos parametros, index solo debe nombrarse "index"-->
+    <li v-for="(item, index) in items">
+      {{ parentMessage }}-{{ index }}-{{ item.message }}
+    </li>
+    <br>
+    <!--Para una mayor familiaridad puedes usar "of" en vez de "in"-->
+    <li v-for="(item, index) of items">
+      {{ parentMessage }}-{{ index }}-{{ item.message }}
+    </li>
+    <br>
+  </ul>
+  <!-- v-for object -->
+  <div v-for="value in object">
+    {{ value }}
+  </div>
+  <br>  
+  <!-- v-for object with two parameters -->
+  <div v-for="(value, key, index) in object">
+    {{ index }}. {{ key }}: {{ value }}
+  </div>
+  <br>
+  <!-- Cuando existen cambios orientados a los objetos o arrays son suceptibles a fallar con el seguimiento de las "keys" es por ellos que se debe la implementacion de vue js de "v-bind:key" para el manejo ordenado de los componentes en los arrays y objetos "track-by=$index" -->
+  <div v-for="item in items" :key="item.id">
+    {{ item.message }}
+  </div>
+  <br>
+  <!-- Metodos de mutacion
+        * push()
+        * pop() 
+        *shift()
+        *unshift()
+        *splice()
+        *sort()
+        *reverse()
+      Estos pueden manejarse por la consola-->
+
+  <!--....(a) comprobacion que no cumple la reactividad-->
+  <div v-for="itemDePrueba in itemsDePrueba1">
+    {{ itemDePrueba }}
+  </div>
+</div>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g7_listrendering.js"></script>

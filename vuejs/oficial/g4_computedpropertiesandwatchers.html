@@ -1,0 +1,16 @@
+<div id="example">
+  {{ message.split('').reverse().join('') }}
+  <p>Mensaje Original: "{{ message }}"</p>
+  <p>Mensaje revertido Computarizado: "{{ c1reversedMessage }}"</p>
+  <p>Mensaje revertido con Metodo: "{{ m1reversedMessage() }}"</p>
+  <p>La hora en representacion del Almacenamiento en Cache del Computarizador vs los Metodos: {{ c2now }}</p>
+</div>
+<div id="watch-example">
+  <p>Ask a yes/no question:<input v-model="question"></p>
+  <p>{{ answer }}</p>
+</div>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g4_computedpropertiesandwatchers.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>

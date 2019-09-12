@@ -1,0 +1,49 @@
+Minimalista: miniframework, no se compromete a algo en particular por ello es compatible con cualquier tecnologia, solo se dedica en el middleware, el enrutamiento y otras cosas.
+
+Por ejemplo si se desea trabajar express con mongodb se utilizaria el marco de conexion con mongoose o un driver para mysql u oracle
+
+basicos_express
+Conceptos básicos con express js
+app.js
+
+
+Sergio Espinoza <48479567.sjep@gmail.com>
+MIT
+
+
+express nos recomienda una serie de herramientas como un stack tool kit para trabaja de forma mas agil,instalados de forma global
+npm install express-generator -g, esto para permitirme llamar a comandos adicionales
+
+express -h
+
+Options:
+
+        --version        output the version number
+    -e, --ejs            add ejs engine support
+        --pug            add pug engine support
+        --hbs            add handlebars engine support
+    -H, --hogan          add hogan.js engine support
+    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+        --no-view        use static html instead of view engine
+    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git            add .gitignore
+    -f, --force          force on non-empty directory
+    -h, --help           output usage information
+
+::: La carpeta g1essentials/g2_generator se creo con el comando express g2_generator
+
+
+
+Express mantiene un core muy simple solo se basa en dos cosas rutas y middleware (son los paquetes, plug and play, unos como filtros, entra uno y sale otro, a partir de modulos avanzado ya no se necesita instalar bodyparser, porque internamente express, esto es el parseo de codigo json con unos metodos)
+
+Filtros: * ya explicado
+Proveedores: Funcionalidad Nueva, es muy sencilla, peticion del usuario, respuesta del servidor y el objeto next
+
+Locales y globales:
+
+
+morgan hacer el marco de una forma mas notable sobre las peticiones que se hace en el servidor
+
+
+
+Socket io comunicacion permanente

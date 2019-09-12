@@ -1,0 +1,61 @@
+Barra de Navegacion
+una tab para el perfil
+
+despues de agregar las paginas de tab como de perfil en app.module, se tiene que hacer q la pagina tab sea la raiz, esto en app.component.ts
+
+
+Lo que primero se debe hacer es crear las paginas para tab y para perfil
+
+entonces despues de eso en la parte de tab ya tiene un codigo predeterminado, entonces para ello se tiene que hacer el codigo html desde cero asi, ademas se tiene que tener la directiva root que indica hacia que direccion se va, que pagina va a ser la raiz de ese tab
+
+/tabs.html
+
+<ion-tabs>
+  <ion-tab tabTitle="Feed" tabIcon="megaphone" [root]=tab1Root></ion-tab>
+  <ion-tab tabTitle="Perfil" tabIcon="cog" [root]=tab2Root></ion-tab>
+</ion-tabs>
+
+Despues  de ello se tiene que ir a la parte de tabs.ts
+
+Antes de contructor de la clase principal poner lo siguiente,
+
+/tabs.ts
+export class TabPage: {
+...
+tab1Root = HomePage;
+tab2Root = PerfilPage;
+...
+}
+
+Esto tambien agregar a los modulos para que reconosca en la app
+
+/app.module.ts
+
+@NgModule({
+  declarations: [
+    ---
+    PerfilPage,
+    TabsPage
+  ]
+})
+----
+entryComponents: [
+  ...
+  PerfilPage,
+  TabsPage
+
+]
+
+Despues de ellos se tiene que hacer q la vista raiz tiene que esta relacionada con los tabs, en vez de mostrar el home directamente
+root:Page:any = HomePage; <<< 
+En vez de esto daremos lugar al origen a TabsPage asi.
+root:Page:any = TabsPage;
+/app.component.ts
+
+export class MyApp {
+  root:Page:any = TabsPage;
+}
+
+
+Despues de todo ello en la Prueba notar que en la navegacion del primer boton mantiene a la raiz de feed en cambio pefil cambia a otra direccion.
+

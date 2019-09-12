@@ -1,0 +1,224 @@
+Borrado de una forma intiutiva para los usuarios, esto es una lista deslizar el dedo y tener opciones entre ellas va  a estar la de eliminar con esto ionic ya cuenta con un control que es una variacion de la lista que se esta utilizando, donde permite deslizar el dedo y ver las opciones. sliding o una lista despegable.
+
+Copiar y pega las listas
+
+ion-content
+que  se tiene que pegar todo para el funcioanmiento deslizable tanto para la derecha como para la izquierda
+
+/home.html
+
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../img/reckoner.jpg">
+        </ion-avatar>
+        <h2>Slimer</h2>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="primary">
+          <ion-icon name="text"></ion-icon>
+          Text
+        </button>
+        <button ion-button color="secondary">
+          <ion-icon name="call"></ion-icon>
+          Call
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+          <ion-icon name="mail"></ion-icon>
+          Email
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+Para uno solo se tiene que borrar la parte de left y quedaria asi
+
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../img/reckoner.jpg">
+        </ion-avatar>
+        <h2>Slimer</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+          <ion-icon name="mail"></ion-icon>
+          Email
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  Comparando y haciendo vista para el moldeo con la lista dinamica
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let lugar of lugares" (click)="goToExistingDetailView(lugar)>
+      <ion-item>
+        <h2>{{lugar.nombre}}</h2>
+        <h3>{{lugar.direccion}}</h3>
+        <p>{{lugar.categoria}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+          <ion-icon name="mail"></ion-icon>
+          Email
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  con ello ya se deberia eliminar la lista anterior y editar el boton que aparece al deslizar, 
+
+  <ion-item-options side="right">
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </button>
+    </ion-item-options>
+
+  Despues de editar y poner la accion de borrar
+
+  <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteLugar(lugar)">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </button>
+    </ion-item-options>
+
+/home.ts
+
+....
+deleteLugar(lugar){
+  this.lugaresService.deteleLugar() {
+    return this.afDB.database.ref('/lugares/' + lugar.id).remove();
+  }
+}
+
+
+/lugares.service.ts
+// Se pone el return para saber cuando se borro el lugar
+deleteLugar(lugar) {
+  return this.lugaresService.deleteLugar(lugar);
+}
+
+Cuando se hace el borrado de un item seleccionado se denota que te lleva a la siguiente vista. Entonces se ve que todo el boton de llevado a otro lugar esta en todo y que contiene al boton de borrado. Esto es provocado por el evento de burbuja. 
+
+Para ello le pasamos el evento de llevar a otro lugar a 
+
+de ion-item-sliding   hacia   ion-tem
+
+para ello que te confirme que ya  esta borrado y que te pregunte  si quieres borrar.
+
+/home.ts
+deleteLugar(lugar){
+  if (confir('Seguro que desea borrar este Lugar?')) {
+    return this.lugaresService.deleteLugar(lugar);
+  }
+}
+
+Entonces para ver en un alert que se borro el lugar debemos tener en cuenta que esto es una funcion asincrona no se puede inferir que esto funciono correctamente, entonces esto se debe verificar que haya terminado se hace el manejo de esta promesa asi.
+
+deleteLugar(lugar){
+  if (confir('Seguro que desea borrar este Lugar?')) {
+    return this.lugaresService.deleteLugar(lugar).then(() => {
+      alert('Lugar eliminado Correctamente');
+    });
+  }
+}
+
+
+
+De otra forma usando las herramientas de ionic se puede hacer lo siguiente.
+
+deleteLugar(lugar) {
+  const confirm = this.alertCtrl.create({
+    title: 'Eliminar Lugar',
+    message: '¿Estas Seguro de Querer Eliminar este Lugar?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        handler: () => {
+          console.log('Eliminación Cancelada!!');
+        }
+      },
+      {
+        text: 'Eliminar',
+        handler: () => {
+          console.log('Procediendo con la Eliminación!!');
+          this.lugaresService.deleteLugar(lugar).then(() => {
+            this.presentLoading();
+          });
+        }
+      }
+    ]
+  });
+  confirm.present();
+}
+
+presentLoading() {
+  const loader = this.loadingCtrl.create({
+    content: "Por Favor, espera...";
+    duration: 1000
+  });
+  loader.present();
+}
+
+Fuentes: 
+https://ionicframework.com/docs/components/#alert-confirm
+https://ionicframework.com/docs/components/#loading
+
+
+fuente para activacion de la camara y guardar en firebase storage
+https://www.youtube.com/watch?v=urFpUVjLw0Y
+
+
+Esto se podria presentar para la creacion o actualizacion de lugar asi.
+
+guardarLugar() {
+
+  })
+}
+
+/alerts.ts
+
+export class AlertControl {
+  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public lugaresService: LugaresService) {
+
+  }
+  const confirmDelete = this.alertCtrl.create({
+    title: 'Eliminar Lugar',
+    message: '¿Estás Seguro de Querer Eliminar este Lugar?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        handler: () => {
+          console.log('Eliminación Cancelada!!!');
+        }
+      },
+      {
+        text: 'Continuar',
+        handler: () => {
+          console.log('Procediendo con la Eliminación!!');
+          this.lugaresService.deleteLugar()...
+        }
+      }   ......
+    ]
+  })  
+}  
+
+
+Aumento de las Imagenes 
+/home.html
+<img src="http://lorempixel.com/350/230/">
+
+/lugar.html
+<ion-card>
+  <img src="http://lorempixel.com/350/230/"/>
+</ion-card>
+
+

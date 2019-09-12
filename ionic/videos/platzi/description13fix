@@ -1,0 +1,40 @@
+Despues de acoplar los estilos en los archivos de home conversation y app(principal) se va a hacer los arreglos segun falta en los archivos inteface, home, conversation.ts
+
+En la parte de /interface/user.ts, agregar una interface especial de agregado de valores univocos. Ademas se hace un aumento de las propiedades existentes en User.
+
+/interface/user.ts
+
+export enum Status {
+  Online: 'Online',
+  Offline: 'OffLine',
+  Busy = 'Busy',
+  AppearOffline = 'Appear Offline',
+  Away = 'Away'
+}
+
+export interface User {
+  nickName: string;
+  age?: number;
+  active: boolean;
+  status: Status;
+  uid: any;
+  email: string;
+  avatar?: string;
+  friend?: any;
+};
+
+....
+
+
+Estas interfaces especiales funcionan como ingreso unitario en los archivos que lo solicitan, como home.ts y conversation.ts
+
+/home.ts
+import { Status, User } from '../../interfaces/user';
+...
+export class HomePage {
+  status: Status; // No olvidar importar desde donde viene
+
+}
+
+
+Despues ya se le da estilo a la conversacion.

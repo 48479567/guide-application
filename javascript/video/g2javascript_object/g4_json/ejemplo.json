@@ -1,0 +1,19 @@
+{
+   "nombre": "Beto Jr",
+   "apellidos": "Quiroga",
+   "edad": 28,
+   "cursos": [
+    {
+      "id": 5,
+      "nombre": "Drupal"
+    },
+    {
+      "id": 19,
+      "nombre": "Drupal Avanzado"
+    },
+    {
+      "id": 55,
+      "nombre": "Javascript"
+    }
+   ]
+}

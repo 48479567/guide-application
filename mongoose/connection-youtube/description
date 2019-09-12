@@ -1,0 +1,41 @@
+install mongodb
+
+_command*admin
+docker-compose up -d
+docker ps
+
+npm init
+npm install mongoose
+
+
+depurar: agregar_configuracion
+
+      "program": "${workspaceFolder}\\index.js"
+      por         "program": "${workspaceFolder}/src/index.js"
+
+
+
+./work.js
+  /*
+  find=[], findOne = {}, limit(1)([]) ~ findOne({})
+  el metodo lean hace que el esquema se devuelva en formato json para que no sea pesado. Esto para que no posea todos los metodos que normalmente bota. lo de malo que no se puede usar metodos como set populate u otros no usar este metodo.
+  */
+
+//  const user = await User.find({
+//     _id: "5c71e5420548332b3421e0f5",
+//     // _id: ObjectId("5c71e5420548332b3421e0f5"), para no tener que estar requiriendo la libreria de mongoose para la transformacion del id, simplemente se tiene que poner el id directamente porque es eso mismo la transformacion que se encarga mongoose. Asi. por el campo _id: ObjectId no es de Javascript.
+//     // name: 'Leo',
+//   })
+//   .lean();
+  // const user = await User.findById("5c71e5420548332b3421e0f5").lean();
+
+  // user.set({
+  //   name: 'leo2'
+  // })
+
+  //   return user;
+// 
+// `SELECT name FROM user WHERE name = 'leo'`
+
+
+  Ahora viene la parte de Populate

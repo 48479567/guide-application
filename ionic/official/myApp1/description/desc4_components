@@ -1,0 +1,87 @@
+**<ion-badge>**
+Iconos Numericos que acompaña a un elemento normalmente usado para mostrar notificaciones, mensajes, estrellas, seguidores, no leidos, info_de un Grupo(eg. grupos de facebook). Tiene estilos(colores, ...).
+ ___________________________
+|                    ___    |
+|Notificaciones     |100|   |
+|___________________________|
+
+(url): https://ionicframework.com/docs/api/badge
+
+Esto puede ser una vista para la muestra de un estado de un icono o boton.
+
+
+**<ion-button>** 
+Esto a cambio de <button ion-button>...
+
+**<ion-ripple-effect>**
+Esto es la representacion de onda al hacer un evento como los botones, pero esto es a cualquiera.
+eg. <div>
+      <ion-ripple-effect></ion-ripple-effect>
+      Un div con efecto de onda.
+    </div>
+(url): https://ionicframework.com/docs/api/ripple-effect
+
+**<ion-chip>**
+Una forma de vista de componentes varios como los chats con imagenes y subfunciones integradas. Pueden ir dentro de el botones, iconos, imagenes, texto y demas. 
+(url):
+
+**<ion-card>**
+Contenedor
+
+
+**<ion-check-box>**
+Puede manejarse en una lista dinamica como 
+eg. <ion-list>
+      <ion-item *ngFor="let itemUser of listUser; let ind = index">
+        <ion-label for="ind">{{itemUser.name}}</ion-label>
+        <ion-checkbox id="ind" slot="end" [(ngModel)]="itemUser.isChecked" value="{{itemUser.value}}">{{itemUser.name}}</ion-checkbox>
+      </ion-item>
+    </ion-list>
+    
+    js
+    public listUser: [string, boolean] = [
+      { name: 'Name1', value: 'name 1', isChecked: true },
+      { name: 'Name2', value: 'name 2', isChecked: false },
+      { name: 'Name3', value: 'name 3', isChecked: true },
+      { name: 'Name4', value: 'name 4', isChecked: false }
+    ];
+    ....
+(url):
+
+**<ion-app>**
+Solo debe haber uno, por aplicacion.
+(url):
+
+**<ion-content>**
+Aqui se controla el scroll, es el contenedor principal de una Pagina.
+(url):
+
+**<ion-date-time>**
+
+(url):
+
+**<ion-fab>**
+
+(url):
+
+**<ion-ripple-effect>**
+
+(url):
+
+**<ion-ripple-effect>**
+
+(url):
+
+**<ion-ripple-effect>**
+
+(url):
+
+
+
+
+
+
+
+
+
+

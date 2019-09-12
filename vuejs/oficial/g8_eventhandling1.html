@@ -1,0 +1,209 @@
+<head>
+  <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+  
+  <h1>Manejo de Eventos</h1>
+  
+  <div id="eventos">
+
+    <button :class="[etl.btnEst, etl.btnEsp, etl.fixRight]" @click="cambioDeColor">Cambiar Color Div y Boton</button>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Primer Ejemplo</h3>
+      <p>
+        El boton fue presionado {{ contador }} veces.
+      </p>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click="contador += 1">Presionar</button>
+      <p>
+        El funcionamiento anterior se puede hacer usando métodos
+      </p>
+    </div><br>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Controladores de Eventos con Métodos</h3>
+      <p>
+        Puedes mostrar el alert presionando el boton o en la consola llamando a la funcion <i>vm.mostrarAlert</i> también en esta parte se muestra el manejado con el <i>evento</i> en cuestion
+      </p>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click="mostrarAlert">Mostrar Saludo</button>
+    </div><br>
+
+    <div :class="[etl.divEst, etl.divEsp]"> 
+      <h3>Métodos en manipuladores en Línea</h3>
+      <p>
+        En lugar de enlazar directamente con un nombre de método, también podemos usar métodos en una declaración de JavaScript en línea, o sea con entradas como parámetro de función:
+      </p>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click="decir('hola')">Decir Hola</button>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click="decir('que')">Decir Que</button>
+      <p>
+        A veces también necesitamos acceder al evento DOM original en un controlador de instrucciones en línea. Puedes pasarlo a un método usando la <b :class="etl.codResal">$event</b> variable especial:
+      </p>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click="advertir('El formulario no se puede enviar todavía.', $event)">Enviar</button>
+    </div><br>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Modificadores de Eventos</h3>
+      <p>
+        Es una necesidad muy común llamar <i :class="etl.codResal">event.preventDefault()</i> o estar <i :class="etl.codResal">event.stopPropagation()</i> dentro de los controladores de eventos. Aunque podemos hacer esto fácilmente dentro de los métodos, sería mejor si los métodos fueran puramente lógicos de datos en lugar de tener que lidiar con los detalles del evento DOM.
+      </p>
+      <p>
+        Para abordar este problema, Vue proporciona modificadores de eventos para <i :class="etl.codResal">v-on</i>. Recuerde que los modificadores son directivas postfixes denotadas por un punto.
+      </p>
+      <ul>
+        <li v-for="eventos in contenidos.event_modifiers.l4_1">
+          <i :class="etl.codResal">{{ eventos.nombre }}</i>
+        </li>
+      </ul>
+
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.event_modifiers.c4_1 }}</pre>
+      </div>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click.once="mostrarAlert">Muestra una Sola Vez</button>
+      <p :class="etl.wngText">
+        El orden es importante cuando se usan modificadores porque es codigo relevante se genera en el mismo orden. Por lo tanto, el uso <i :class="etl.codResal">@click.prevent.self</i> evitara <b :class="etl.codResal">todos los clicks</b>, mientras <i :class="etl.codResal">@click.self.prevent</i> que solo evitara clicks en el elemento en si. <br>
+      </p>
+
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.event_modifiers.c4_1 }}</pre>
+      </div>
+      
+      <p>
+        A diferencia de los otros modificadores, que son exclusivos de los eventos DOM nativos, el modificador <i :class="etl.codResal">.once</i> también se puede utilizar en eventos <b :class="etl.codResal">componentes</b> . Si aún no ha leído sobre componentes, no se preocupe por esto por ahora.
+      </p>
+      <p>
+        Vue también ofrece el modificador <i :class="etl.codResal">.passive</i>, correspondiente a  la opcion <b :class="etl.codResal">passive</b> de <b :class="etl.codResal">addEventListener</b>.
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.event_modifiers.c4_3 }}</pre>
+      </div>  
+      <p>
+        El modificador de eventos <i :class="etl.codResal">.pasive</i> es muy util para obtener mayor rendimiento es los dispositivos moviles (tactiles).
+      </p>
+      <p :class="etl.wngText">
+        No usar <i :class="etl.codResal">.passive</i> y <i :class="etl.codResal">.prevent</i> juntos, porque <i :class="etl.codResal">.prevent</i> se ignorara y su navegador probablemente le mostrara una advertencia. Recuerde, <i :class="etl.codResal">.passive</i> comunica al navegador que <i><b>no</b></i> desea evitar el comportamiento predeterminado del evento.
+      </p>
+    </div>
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Modificadores Clave</h3>
+      <p>
+        Cuando se escucha eventos de teclado, a menudo necesitamos verificar codigos de teclas comunes. Vue tambien permite agregar modificadores clave para <i :class="etl.codResal">v-on</i> escuchar eventos clave:
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{  contenidos.event_key.c5_1 }}</pre>
+      </div>
+      <br>
+      <input @keyup.13="decir('Presionaste key 13')"/>
+      <p>
+        Recordar todo el <i :class="etl.codResal">keyCode</i> es molesto, por lo que Vue proporciona alias para las claves mas utilizadas:
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.event_key.c5_2 }}</pre>
+      </div>
+      <p>
+        Aqui esta la lista completa de alias modificadores clave:
+      </p>
+      <input @keydown.delete="decir('Estas borrando contenido')"/>
+      <ul>
+        <li v-for="mod_clave of contenidos.event_key.l5_1">
+          <i :class="etl.codResal">{{ mod_clave.name }}</i>
+        </li>
+      </ul>
+      <p>
+        Tambien puede definir <b :class="etl.codResal">alias modificadores de clave personalizados</b> a traves del objeto global <i :class="etl.codResal">config.keyCodes</i>:
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.event_key.c5_3 }}</pre>
+      </div>
+      <input @keydown.prevent.112="decir('Estas presionando f1')"/>
+    </div>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3># Modificadores Automaticos de Teclas</h3>
+      <div :class="etl.wngText">
+        Nuevo en 2.5.0+
+      </div>
+      <p>
+        Tambien puede usar directamente cualquier nombre de clave valido expuesto a traves de los modificadores <i :class="etl.codResal">KeyboeadEvent.key</i> convirtiendolos a <b>kebab-case:</b>
+      </p>
+    <div :class="etl.cmpCod">
+      <pre>{{ contenidos.automatic_key_modifiers.c6_1 }}</pre>
+    </div>
+    <input @keyup.page-down="decir('Presionaste Abajo')">
+    <p>En el ejemplo anterior, solo se llamara al controlador si <i :class="etl.codResal">$event.key === 'PageDown'</i>.
+    </p>
+    <p :class="etl.wngText">
+      Algunas teclas ( <i :class="etl.codResal">.esc</i> y otras) tienen valores <i :class="etl.codResal">key</i> incoherentes en <b>IE 9</b>, se deben preferir sus alias integrados si necesita compatibilidad con <b>IE 9</b>.
+    </p>
+    </div>
+
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>Teclas modificadoras del Sistema</h3>
+      <p :class="etl.wngText">
+        Nuevo en 2.1.0+
+      </p>
+      <p>
+        Puede usar los siguientes modificadores para activar escuchas de eventos de mouse o teclado solo cuando se presiona la tecla modificadora correspondiente:
+      </p>
+      <ul>
+        <li v-for="keyModSystem of contenidos.system_modifier_keys.l7_1" :class="etl.codResal">{{ keyModSystem.name }}</li>
+      </ul>
+      <p :class="etl.wngText">
+        Nota: En los teclados de Macintosh, meta es la tecla de comando (⌘). En los teclados de windows, meta es la tecla de Windows (⊞). En los teclados de <b>Sun Microsystems</b>, el meta esta marcado como un diamante solido (◆). En ciertos teclados, especificamente los teclados y sucesores de maquinas <b>MIT</b> y <b>Lisp</b>, como el teclado <b>Knight</b>, el teclado <b>space-cadet</b>, meta esta etiquetado coomo <b>"META"</b>. En los teclados de Symbolics, meta esta etiquetado como <b>"META"</b> o <b>"Meta"</b>.
+      </p>
+      <p>
+        Por Ejemplo:
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.system_modifier_keys.c7_1 }}</pre>
+      </div>
+      <input @keyup.alt.67="decir('Presionaste alt + C')" placeholder="Presiona alt + C">
+      <button :class="[etl.btnEst, etl.btnEsp]" @click.ctrl="decir('ctrl')">Ctrl + Click</button><br>
+      <p :class="etl.wngText">
+        Tenga en cuenta que las teclas modificadoras son diferentes de las teclas normales y cuando se usan con el evento <i :class="etl.codResal">keyup</i>, deben presionarse cuando se emite el evento. En otras palabras, <i :class="etl.codResal">keyup.ctrl</i> solo se activara si suelta una tecla mientras mantiene presionado <i :class="etl.codResal">ctrl</i>. No se activara si sueltas la tecla <i :class="etl.codResal">ctrl</i> sola. Si usted quiere tal comportamiento, utilice el <i :class="etl.codResal">keyCode</i> de <i :class="etl.codResal">ctrl</i> en su lugar: <b :class="etl.codResal">keyup.17</b>.
+      </p>
+      <input @keyup.17="decir('Solo presionaste Ctrl')" placeholder="Presionar solamente Ctrl">
+    </div>
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3># Modificador <i :class="etl.codResal">.exact</i></h3>
+      <h4 :class="etl.wngText">Nuevo en 2.5.0+</h4>
+      <p>
+        El modificador <i :class="etl.codResal">.exact</i> permite el control de la combinacion exacta de modificadores del sistema necesarios para desencadenar un evento.
+      </p>
+      <div :class="etl.cmpCod">
+        <pre>{{ contenidos.exact_modifier.c8_1 }}</pre>
+      </div>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click.ctrl="decir('Presionaste Ctrl + Otro Modificador')">Ctrl + otro Modificador</button>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click.ctrl.exact="decir('Solo Ctrl')">Solo Ctrl</button>
+      <button :class="[etl.btnEst, etl.btnEsp]" @click.exact="decir('Esto funciona sin modificadores')">Solo Click</button>
+    </div>
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3># Modificadores de los Botones del Mouse</h3>
+      <h4 :class="etl.wngText">Nuevo en 2.2.0+</h4>
+      <ul>
+        <li v-for="mouseModBtn of contenidos.mouse_button_modifiers.l9_1" :class="etl.codResal">
+          {{ mouseModBtn.name }}
+        </li>
+      </ul>
+      <p>
+        Esto modificadores restringen el controlador a eventos activados por un boton especifico del mouse.
+      </p>
+      <button @click.middle="decir('Presionaste el boton intermedio')" :class="[etl.btnEst, etl.btnEsp]">Medio</button>
+      <button @click.left="decir('Presionaste el boton izquierdo')" :class="[etl.btnEst, etl.btnEsp]">Click</button>
+      <button @click.right="decir('Presionaste el boton derecho')" :class="[etl.btnEst, etl.btnEsp]">Derecho</button>
+    </div>
+    <div :class="[etl.divEst, etl.divEsp]">
+      <h3>¿Por qué Listeners en HTML?</h3>
+      <p>
+       Es posible que le preocupe que todo este enfoque de escucha de eventos viole viejas y buenas reglas sobre la <b>"Separacion de Preocupaciones"</b>. Tenga la seguridad de que todas las funciones y expresiones del controlador Vue estan estrictamente vinculadas al <b>ViewModel</b> que maneja la vista actual, no causara ninguna dificultad de mantenimiento. De hecho, hay varios veneficuos en el uso de <i :class="etl.codResal">v-on</i>:
+      </p>
+      <ol>
+        <li v-for="razonVOn of contenidos.listener_html.l10_1">
+          {{ razonVOn.name }}
+        </li>
+      </ol>
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./g8_eventhandling1.js"></script>
+
+</body>

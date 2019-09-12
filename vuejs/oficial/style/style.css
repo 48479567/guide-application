@@ -1,0 +1,54 @@
+/*General*/
+p {
+  text-align: justify;
+}
+
+.divOff {
+  border: dashed 2px blue;
+}
+.divOn {
+  border: dotted 2px silver;
+}
+.divEsp {
+  padding: 8px;
+  margin: 5px;
+}
+.btnOff {
+  background-color: olivedrab;
+  color: violet;
+}
+.btnOn {
+  background-color: red;
+  color: beige;
+  
+}
+.btnEsp {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.linea {
+  display: inline-block;
+}
+.fixRight {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+.codResal {
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.cmpCod {
+  background-color: rgb(17, 10, 10);
+  color: salmon;
+  overflow: auto;
+  border: solid 1px gray;
+  margin: auto;  
+  padding: 5px;
+}
+.wngText {
+  border-left: groove 5px slateblue;
+  padding-left: 20px;
+  box-sizing: border-box;
+}

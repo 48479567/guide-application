@@ -1,0 +1,52 @@
+Nuestro Proyecto tiene que tener declarado la clase LugarPage para que indique que quiere usarlo. esto tanto en declarations como en entrycomponents, en declarations lo inicializa pero no sabe si va a usarlo o no nuestro proyecto por eso entrycomponents se encarga implantar el componente en el proyecto (esto es por que ionic quiere ahorrar memoria o espacion para una ejecucion mas liviana)
+
+/appmodule.ts
+
+@NgModule({
+  declarations: [
+    ---
+    LugarPage;
+  ]
+})
+  ---
+  entryComponents: [
+    ..
+    LugarPage
+  ]
+
+LugarPage viene de la clase en lugar.ts avisando ademas que la vista de html es lugar.html en templateUrl
+
+/lugar.ts
+
+@Component({
+  selector: 'page-lugar',
+  templateUrl: 'lugar.html',
+})
+export class LugarPage {
+  ...
+}
+
+
+Despues de carga eso se hace lo siguiente en la creacion de un boton en home.html asi.
+
+<ion-content>
+  <button ion-button color="dark" (click)="navegarALugar()">Presionar</button>
+</ion-content>
+
+Como se ve en la accion se ve la directiva de click este metodo debe estar incluido en home.ts esto se pone despues del constructor
+
+/home.ts
+export class HomePage {
+
+  constructor(public navCtrl: NavControler) {
+
+  }
+
+  navegarALugar() {
+    this.navCtrl.push(LugarPage);
+  }
+}
+
+
+push hace que navCtrl targete una vista se agregue y se diriga a LugarPage, pop hace lo contrario. Esto para navCtrl.
+

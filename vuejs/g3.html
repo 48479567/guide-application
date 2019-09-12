@@ -1,0 +1,21 @@
+<div id="app">
+  <div class="product">
+    <div class="product-image">
+      <img v-bind:src="image" alt="">
+    </div>
+    
+    <div class="product-info" :style="inline">
+      <h1>{{ product }}</h1>
+    </div>
+    
+    <div v-if="inStock" :style="inline">
+      <h2>{{ other_product }}</h2>
+    </div>
+  </div>
+
+  <input type="text" v-model="other_product">
+
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="main3.js"></script>

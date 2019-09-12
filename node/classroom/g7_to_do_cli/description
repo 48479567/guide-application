@@ -1,0 +1,25 @@
+yargs: que me permite crear comandos propios desde mis aplicaciones
+color: terminar con colores
+
+
+process.argv0
+esto es de suma importancia, es un arreglo de dos posiciones, hacer notar que esto se puede editar como aumentar elementos del arreglo,
+
+  argv:
+   [ 'node',
+     'D:\\io\\inf\\aplicacion_guia\\node_js\\classroom\\g7_to_do_cli\\app.js' ],
+  execArgv:
+   [ 'C:\\Users\\ASUS\\AppData\\Roaming\\nvm\\v11.7.0\\node_modules\\babel-cli\\lib\\_babel-node.js' ],
+
+   en el otro caso en el primer elemento se ve a /home/user/.nvm/versions/node/::version_de_node/bin/node   este es el ejecutable de node
+   D:\\io\\inf\\aplicacion_guia\\node_js\\classroom\\g7_to_do_cli\\app.js   archivo que se ejecuta
+
+
+
+   /*Informacion de la lista de tareas*/ 
+   :todo_command.js )))   archivo donde se define los comandos que se ejecutan desde la aplicacion en la cli de node.
+
+   :todo_data.json )))    informacion de la lista de tareas, como control
+
+   :my_modules/todo_list.js )))      donde se pone las tareas
+  

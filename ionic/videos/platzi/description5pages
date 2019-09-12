@@ -1,0 +1,120 @@
+Esta compuesto por pages.(4)
+
+1 Login: Para hacer las operaciones de usuario
+2 Home:
+3 Configuracion:
+4 Conversacion:
+
+
+/home.ts
+
+//Decorador de Component, esto es provisto por typescript es propio de angular, esto es una clase que tiene cierta funcion y siempre esta asociado a un html, un decorador es una manera que el compilador obtenga cierta funcionalidad especifica para nuestra clase. Este decorador no es propio de ionic, angular, typescript, menos de js. Esto se crea de la mano de typescript, esto permite tratar a cierto tipo de clase de cierta manera. Por ejemplo en ionic que varias clases van a ser componentes, pages, o servicios o injectables, entonces generando en cada una de estas clases funcionalidad que con los decoradores se agrupan para caracterizarlos.
+// Por ejemplo los componentes siempre van a tener atado a html con alguno otra cosa, puede ser otros componentes y pages.
+// Pages son simples y solo uno completo (html)
+// Injectables no estan atados a un html, permite estar en otras clases.
+
+@Component ({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+
+
+// Los decoradores proveen funcionalidad comun a cada uno, por ejemplo las pages son del tipo component, selector que ayuda al ruteador de ionic, y templateUrl que dice cual vista esta relacionado.
+
+export class HomePage {
+  // Esto para el appmodule y otros.
+  constructor (public navCtrl: NavController) {
+    // Primer metodo que se ejecuta. y con los objetos que se ejecutan dan mayor funcionalidad, como NavController, 
+  }
+}
+
+// Asi esta compuesto todas la pages, tienen tambien archivos estilos que ellos solo se aplican a cierta page que esta relacionada.
+
+//Login Profile, Conversation, son las pages que faltan por ahora.
+
+_command:
+
+ionic g page Login
+
+/login.ts
+// Tiene adicionalmente un decorador de @IonicPage(), esto no esta en los pages iniciales, esto le dice al compilador que es un page, y no debe estar una dentro de otra con su identificado unico, para eso son los componentes, y los demas componentes.
+
+@IonicPage ()
+...
+
+// Como otro adicional tiene tambien el metodo, se ejecuta cuando carga la vista de esta Page.
+ionViewDidLoad () {
+  console.log(...)
+}
+
+/login.scss
+
+/login.module.ts
+
+//Esto se genera con cada pagina que se genere, esto lo que hace importar la page y estar disponible en el resto de la aplicacion. Esto es cuando se tiene que importar varias paginas relacionadas como uno.
+
+
+_command:
+
+ionic g page Conversation
+ionic g page Profile
+
+
+// Si se desea hacer que estas ultimas esten disponibles en la barra lateral, ir a app.component.ts
+
+/app.component.ts
+
+import ...
+
+@Component ({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
+  rootPage: any = HomePage;
+
+  pages: Array<{title: string, component: any}>;
+
+  constructor(public platform: Platfom, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeApp();
+    
+    // Used for an example for ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'List', component: ListPage },
+      // Esto se agrego ultimo
+      { title: 'Login', component: LoginPage },
+      { title: 'Conversation', component: ConversationPage },
+      { title: 'Profile', component: ProfilePage }
+    ];
+  }
+
+  initializaApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+  openPage(page) {
+    // Reset the content nav to have just this page
+  }
+}
+
+Ya agregado en la nav las tres paginas
+
+Nos encontramos con el primer error que dice que ionic no encuentra a esta paginas en el modulo pricipal. Para ello importar el modulo secundario en el modulo principal
+
+/app.module.ts
+// Este tipo de importacion se hace para que obtenga las relacionantes de cada una de la pages.
+import: [
+  ...
+  LoginPageModule,
+  ConversationPageModule,
+  ProfilePageModule
+]
+
+
+
