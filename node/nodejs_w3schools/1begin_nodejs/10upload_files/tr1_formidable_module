@@ -1,0 +1,118 @@
+Node.js Subir archivos
+El formidable módulo
+Hay un módulo muy bueno para trabajar con cargas de archivos, llamado "Formidable".
+
+El módulo Formidable se puede descargar e instalar usando NPM:
+
+commando
+:::::::::::::::::::::::::::::::::::
+C:\Users\Asus>npm install formidable
+::::::::::::::::::::::::::::::::::::
+
+Después de haber descargado el módulo Formidable, puede incluir el módulo en cualquier aplicación:
+
+var formidable = require('formidable');
+
+Subir archivos
+Ahora está listo para crear una página web en Node.js que le permita subir archivos a su computadora:
+
+Paso 1: crea un formulario de carga
+Cree un archivo Node.js que escriba un formulario HTML, con un campo de carga:
+
+Ejemplo
+Este código producirá un formulario HTML:
+
+////////
+
+var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+  res.write('<input type="file" name="filetoupload"><br>');
+  res.write('<input type="submit">');
+  res.write('</form>');
+  return res.end();
+}).listen(8080);
+
+///////////
+
+Paso 2: analizar el archivo cargado
+Incluya el módulo Formidable para poder analizar el archivo cargado una vez que llegue al servidor.
+
+Cuando el archivo se carga y analiza, se coloca en una carpeta temporal en su computadora.
+
+Ejemplo
+El archivo se cargará y se colocará en una carpeta temporal:
+
+
+////////////
+
+var http = require('http');
+var formidable = require('formidable');
+
+http.createServer(function (req, res) {
+  if (req.url == '/fileupload') {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      res.write('File uploaded');
+      res.end();
+    });
+  } else {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="filetoupload"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
+  }
+}).listen(8080);
+
+
+/////////////////
+
+Paso 3: guarda el archivo
+Cuando un archivo se carga correctamente en el servidor, se coloca en una carpeta temporal.
+
+La ruta a este directorio se puede encontrar en el objeto "archivos", pasado como el tercer argumento en la parse()función de devolución de llamada del método.
+
+Para mover el archivo a la carpeta que elija, use el módulo Sistema de archivos y cambie el nombre del archivo:
+
+Ejemplo
+Incluya el módulo fs y mueva el archivo a la carpeta actual:
+
+///////////////////
+
+
+var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
+
+http.createServer(function (req, res) {
+  if (req.url == '/fileupload') {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = 'C:/Users/Your Name/' + files.filetoupload.name;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        res.write('File uploaded and moved!');
+        res.end();
+      });
+ });
+  } else {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="filetoupload"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
+  }
+}).listen(8080);
+
+///////////////////
+
+commando
+::::::::::::::::::::::
+C:/Users/Asus/w3schools_nodejs/10fileupload/node sv1_uploadfile.js
+::::::::::::::::::::::

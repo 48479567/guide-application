@@ -1,0 +1,29 @@
+¿Qué es NPM?
+NPM es un administrador de paquetes para paquetes Node.js, o módulos si lo desea.
+www.npmjs.com aloja miles de paquetes gratuitos para descargar y usar.
+El programa NPM está instalado en su computadora cuando instala Node.js
+
+¡NPM ya está listo para ejecutarse en tu computadora!
+
+¿Qué es un paquete?
+Un paquete en Node.js contiene todos los archivos que necesita para un módulo.
+
+Los módulos son bibliotecas de JavaScript que puede incluir en su proyecto.
+
+Descargar un paquete
+Descargar un paquete es muy fácil.
+
+Abra la interfaz de la línea de comando e indique a NPM que descargue el paquete que desea.
+
+Quiero descargar un paquete llamado "mayúscula":
+
+//cmd>>>Descargar "mayúsculas":
+//C:\Users\Your Name>npm install upper-case
+
+¡Ahora ha descargado e instalado su primer paquete!
+
+NPM crea una carpeta llamada "node_modules", donde se colocará el paquete. Todos los paquetes que instale en el futuro se colocarán en esta carpeta.
+
+Mi proyecto ahora tiene una estructura de carpetas como esta:
+
+C:\Users\My Name\node_modules\upper-case

@@ -1,0 +1,77 @@
+Node.js MySQL
+Node.js se puede usar en aplicaciones de bases de datos.
+
+Una de las bases de datos más populares es MySQL.
+
+Base de datos MySQL
+Para poder experimentar con los ejemplos de código, debe tener MySQL instalado en su computadora.
+
+Puede descargar una base de datos MySQL gratuita en https://www.mysql.com/downloads/ .
+
+Instalar el controlador MySQL
+Una vez que tiene MySQL en funcionamiento en su computadora, puede acceder a él utilizando Node.js.
+
+Para acceder a una base de datos MySQL con Node.js, necesita un controlador MySQL. Este tutorial usará el módulo "mysql", descargado de NPM.
+
+Para descargar e instalar el módulo "mysql", abra el Command Terminal y ejecute lo siguiente:
+//////////////////////////
+C:\Users\Your Name>npm install mysql
+//////////////////////////
+Ahora ha descargado e instalado un controlador de base de datos mysql.
+
+Node.js puede usar este módulo para manipular la base de datos MySQL:
+**********************************
+var mysql = require('mysql');
+**********************************
+
+Crear conexión
+Comience creando una conexión a la base de datos.
+
+Use el nombre de usuario y la contraseña de su base de datos MySQL.
+
+demo_db_connection.js
+**********************************
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+**********************************
+Guarde el código anterior en un archivo llamado "demo_db_connection.js" y ejecute el archivo:
+
+Ejecute "demo_db_connection.js"
+///////////////////////////////////////////
+C:\Users\Your Name>node demo_db_connection.js
+///////////////////////////////////////////
+Lo cual te dará este resultado:
+///////////////////////////////////////////
+Connected!
+///////////////////////////////////////////
+Ahora puede comenzar a consultar la base de datos utilizando instrucciones SQL.
+
+Consulta una base de datos
+Use sentencias SQL para leer desde (o escribir) una base de datos MySQL. Esto también se llama "consultar" la base de datos.
+
+El objeto de conexión creado en el ejemplo anterior tiene un método para consultar la base de datos:
+**********************************
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Result: " + result);
+  });
+});
+**********************************
+El método de consulta toma un enunciado sql como parámetro y devuelve el resultado.
+
+Aprenda a leer, escribir, eliminar y actualizar una base de datos en los próximos capítulos.
+
+Lea más acerca de las declaraciones SQL en nuestro Tutorial de SQL .

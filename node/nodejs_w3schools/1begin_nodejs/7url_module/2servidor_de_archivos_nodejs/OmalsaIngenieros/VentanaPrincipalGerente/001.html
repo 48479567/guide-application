@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<style>
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.apltrans {
+    border: 10px solid yellow;
+    background-color: green;
+    width: 100px;
+    height: 200px;
+    transition: width 2s, height 4s;
+    overflow: hidden;
+}
+.apltrans:hover {
+    width: 400px;
+    height: 600px;
+}
+
+.animation {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 4s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+</style>
+<body style="text-align:center;">
+
+<h2>Left Tooltip w/ Right Arrow</h2>
+
+<div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
+
+<div class="apltrans">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eius suscipit, ea sapiente tempore earum delectus eos vel odit. Porro, perferendis, alias. Eos et placeat numquam quasi quia, laudantium doloremque.</p>
+</div>
+
+<a href="#"></a>
+
+<div class="animation"></div>
+
+</body>
+</html>

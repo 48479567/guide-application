@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Omalsa Ingenieros</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="VPGEstilo.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-fixed-left navbar-minimal animate" role="navigation">
+		<div class="navbar-toggler animate">
+			<span class="menu-icon"></span>
+		</div>
+		<ul class="navbar-menu animate">
+			<li>
+				<a href="#about-us" class="animate">
+					<span class="desc animate"> Who We Are </span>
+					<span class="glyphicon glyphicon-user"></span>
+				</a>
+			</li>
+			<li>
+				<a href="#blog" class="animate">
+					<span class="desc animate"> What We Say </span>
+					<span class="glyphicon glyphicon-info-sign"></span>
+				</a>
+			</li>
+			<li>
+				<a href="#contact-us" class="animate">
+					<span class="desc animate"> How To Reach Us </span>
+					<span class="glyphicon glyphicon-comment"></span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+<!-- START OF HTML FOR DEMO - NOT NEEDED -->
+<div class="container">
+	<div class="row">
+		<div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+			<h1 class="title">Vista Principal Gerente</h1>
+		</div>
+	</div>
+	
+</div>
+<a href="http://bootsnipp.com/iframe/PbDb5" class="btn btn-primary" id="fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen"><span class="glyphicon glyphicon-fullscreen"></span></a>
+<!-- END OF HTML FOR DEMO - NOT NEEDED -->
+<script type="text/javascript">
+$(function () {
+    /* START OF DEMO JS - NOT NEEDED */
+    if (window.location == window.parent.location) {
+        $('#fullscreen').html('<span class="glyphicon glyphicon-resize-small"></span>');
+        $('#fullscreen').attr('href', 'http://bootsnipp.com/mouse0270/snippets/PbDb5');
+        $('#fullscreen').attr('title', 'Back To Bootsnipp');
+    }    
+    $('#fullscreen').on('click', function(event) {
+        event.preventDefault();
+        window.parent.location =  $('#fullscreen').attr('href');
+    });
+    $('#fullscreen').tooltip();
+    /* END DEMO OF JS */
+    
+    $('.navbar-toggler').on('click', function(event) {
+		event.preventDefault();
+		$(this).closest('.navbar-minimal').toggleClass('open');
+	})
+});
+</script>
+</body>
+</html>

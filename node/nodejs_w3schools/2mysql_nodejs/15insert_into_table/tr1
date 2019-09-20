@@ -1,0 +1,185 @@
+
+Insertar en la tabla
+Para llenar una tabla en MySQL, use la instrucción "INSERT INTO".
+
+Ejemplo
+Inserta un registro en la tabla de "clientes":
+
+/////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+});
+/////////////////////////////////////
+
+
+Guarde el código anterior en un archivo llamado "demo_db_insert.js" y ejecute el archivo:
+
+Ejecute "demo_db_insert.js"
+
+************************************
+C:\Users\Your Name>node demo_db_insert.js
+************************************
+
+
+Lo cual te dará este resultado:
+
+************************************
+Connected!
+1 record inserted
+************************************
+
+
+
+Insertar múltiples registros
+Para insertar más de un registro, haga una matriz que contenga los valores e inserte un signo de interrogación en el sql, que será reemplazado por la matriz de valores:
+INSERT INTO customers (name, address) VALUES ?
+
+Ejemplo
+Complete la tabla de "clientes" con datos:
+
+/////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var sql = "INSERT INTO customers (name, address) VALUES ?";
+  var values = [
+    ['John', 'Highway 71'],
+    ['Peter', 'Lowstreet 4'],
+    ['Amy', 'Apple st 652'],
+    ['Hannah', 'Mountain 21'],
+    ['Michael', 'Valley 345'],
+    ['Sandy', 'Ocean blvd 2'],
+    ['Betty', 'Green Grass 1'],
+    ['Richard', 'Sky st 331'],
+    ['Susan', 'One way 98'],
+    ['Vicky', 'Yellow Garden 2'],
+    ['Ben', 'Park Lane 38'],
+    ['William', 'Central st 954'],
+    ['Chuck', 'Main Road 989'],
+    ['Viola', 'Sideway 1633']
+  ];
+  con.query(sql, [values], function (err, result) {
+    if (err) throw err;
+    console.log("Number of records inserted: " + result.affectedRows);
+  });
+});
+/////////////////////////////////////
+
+Guarde el código anterior en un archivo llamado "demo_db_insert_multple.js" y ejecute el archivo:
+
+
+Ejecute "demo_db_insert_multiple.js"
+
+************************************
+C:\Users\Your Name>node demo_db_insert_multiple.js
+************************************
+
+Lo cual te dará este resultado:
+
+************************************
+Connected!
+Number of records inserted: 14
+************************************
+
+
+El Objeto Result
+Al ejecutar una consulta, se devuelve un objeto de resultado.
+
+El objeto de resultado contiene información sobre cómo la consulta afectó la tabla.
+
+El objeto resultado devuelto por el ejemplo anterior se ve así:
+
+/////////////////////////////////////
+{
+  fieldCount: 0,
+  affectedRows: 14,
+  insertId: 0,
+  serverStatus: 2,
+  warningCount: 0,
+  message: '\'Records:14  Duplicated: 0  Warnings: 0',
+  protocol41: true,
+  changedRows: 0
+}
+/////////////////////////////////////
+
+Los valores de las propiedades se pueden mostrar así:
+
+Ejemplo
+Devuelve el número de filas afectadas:
+
+************************************
+console.log(result.affectedRows)
+************************************
+
+Lo cual producirá este resultado:
+
+************************************
+14
+************************************
+
+
+Obtener ID insertado
+Para las tablas con un campo de ID de incremento automático, puede obtener el ID de la fila que acaba de insertar haciendo una pregunta al objeto de resultado.
+
+Nota: Para poder obtener la identificación insertada, solo se puede insertar una fila .
+
+Ejemplo
+Inserta un registro en la tabla "clientes" y devuelve la ID:
+
+/////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  var sql = "INSERT INTO customers (name, address) VALUES ('Michelle', 'Blue Village 1')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted, ID: " + result.insertId);
+  });
+});
+/////////////////////////////////////
+
+Guarde el código anterior en un archivo llamado "demo_db_insert_id.js" y ejecute el archivo:
+
+Ejecute "demo_db_insert_id.js"
+
+************************************
+C:\Users\Your Name>node demo_db_insert_id.js
+************************************
+
+Que le dará algo como esto a cambio:
+
+************************************
+1 record inserted, ID: 15
+************************************

@@ -1,0 +1,219 @@
+Node.js MySQL Select From
+
+Selección de una tabla
+Para seleccionar datos de una tabla en MySQL, use la instrucción "SELECT".
+
+Ejemplo
+Seleccione todos los registros de la tabla "clientes" y visualice el objeto resultante:
+
+////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT * FROM customers", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+////////////////////////////////////
+
+SELECT * devolverá todas las columnas
+
+Guarde el código anterior en un archivo llamado "demo_db_select.js" y ejecute el archivo:
+
+Ejecute "demo_db_select.js"
+************************************
+C:\Users\Your Name>node demo_db_select.js
+************************************
+
+Lo cual te dará este resultado:
+************************************
+[
+  { id: 1, name: 'John', address: 'Highway 71'},
+  { id: 2, name: 'Peter', address: 'Lowstreet 4'},
+  { id: 3, name: 'Amy', address: 'Apple st 652'},
+  { id: 4, name: 'Hannah', address: 'Mountain 21'},
+  { id: 5, name: 'Michael', address: 'Valley 345'},
+  { id: 6, name: 'Sandy', address: 'Ocean blvd 2'},
+  { id: 7, name: 'Betty', address: 'Green Grass 1'},
+  { id: 8, name: 'Richard', address: 'Sky st 331'},
+  { id: 9, name: 'Susan', address: 'One way 98'},
+  { id: 10, name: 'Vicky', address: 'Yellow Garden 2'},
+  { id: 11, name: 'Ben', address: 'Park Lane 38'},
+  { id: 12, name: 'William', address: 'Central st 954'},
+  { id: 13, name: 'Chuck', address: 'Main Road 989'},
+  { id: 14, name: 'Viola', address: 'Sideway 1633'}
+]
+************************************
+
+
+Seleccionando Columnas
+Para seleccionar solo algunas de las columnas en una tabla, use la instrucción "SELECT" seguida del nombre de la columna.
+
+
+Ejemplo
+Seleccione el nombre y la dirección de la tabla "clientes" y visualice el objeto de devolución:
+
+////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT name, address FROM customers", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+////////////////////////////////////
+
+Guarde el código anterior en un archivo llamado "demo_db_select2.js" y ejecute el archivo:
+
+
+Ejecute "demo_db_select2.js"
+
+************************************
+C:\Users\Your Name>node demo_db_select2.js
+************************************
+
+Lo cual te dará este resultado:
+
+************************************
+[
+  { name: 'John', address: 'Highway 71'},
+  { name: 'Peter', address: 'Lowstreet 4'},
+  { name: 'Amy', address: 'Apple st 652'},
+  { name: 'Hannah', address: 'Mountain 21'},
+  { name: 'Michael', address: 'Valley 345'},
+  { name: 'Sandy', address: 'Ocean blvd 2'},
+  { name: 'Betty', address: 'Green Grass 1'},
+  { name: 'Richard', address: 'Sky st 331'},
+  { name: 'Susan', address: 'One way 98'},
+  { name: 'Vicky', address: 'Yellow Garden 2'},
+  { name: 'Ben', address: 'Park Lane 38'},
+  { name: 'William', address: 'Central st 954'},
+  { name: 'Chuck', address: 'Main Road 989'},
+  { name: 'Viola', address: 'Sideway 1633'}
+]
+************************************
+
+El Objeto Resultado
+Como puede ver en el resultado del ejemplo anterior, el objeto resultante es una matriz que contiene cada fila como un objeto.
+
+Para devolver, por ejemplo, la dirección del tercer registro, simplemente consulte la propiedad de dirección del tercer objeto de la matriz:
+
+Ejemplo
+Devuelve la dirección del tercer registro:
+
+************************************
+console.log(result[2].address);
+************************************
+
+Lo cual producirá este resultado:
+
+************************************
+Apple st 652
+************************************
+
+
+El objeto Fields
+El tercer parámetro de la función de devolución de llamada es una matriz que contiene información sobre cada campo en el resultado.
+
+Ejemplo
+Seleccione todos los registros de la tabla "clientes" y visualice el objeto de campos :
+
+////////////////////////////////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT name, address FROM customers", function (err, result, fields) {
+    if (err) throw err;
+    console.log(fields);
+  });
+});
+////////////////////////////////////
+
+Guarde el código anterior en un archivo llamado "demo_db_select_fields.js" y ejecute el archivo:
+
+Ejecute "demo_db_select_fields.js"
+
+************************************
+C:\Users\Your Name>node demo_db_select_fields.js
+************************************
+
+Lo cual te dará este resultado:
+
+************************************
+[
+  {
+    catalog: 'def',
+    db: 'mydb',
+    table: 'customers',
+    orgTable: 'customers',
+    name: 'name',
+    orgName: 'address',
+    charsetNr: 33,
+    length: 765,
+    type: 253,
+    flags: 0,
+    decimals: 0,
+    default: undefined,
+    zeroFill: false,
+    protocol41: true
+  },
+  {
+    catalog: 'def',
+    db: 'mydb',
+    table: 'customers',
+    orgTable: 'customers',
+    name: 'address',
+    orgName: 'address',
+    charsetNr: 33,
+    length: 765,
+    type: 253,
+    flags: 0,
+    decimals: 0,
+    default: undefined,
+    zeroFill: false,
+    protocol41: true
+  {
+]
+************************************
+
+Como puede ver en el resultado del ejemplo anterior, el objeto fields es una matriz que contiene información sobre cada campo como un objeto.
+
+Para devolver, por ejemplo, el nombre del segundo campo, simplemente consulte la propiedad del nombre del segundo elemento de matriz:
+
+Ejemplo
+Devuelve el nombre del segundo campo:
+
+************************************
+console.log(fields[1].name);
+************************************
+
+Lo cual producirá este resultado:
+************************************
+address
+************************************

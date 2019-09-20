@@ -1,0 +1,39 @@
+Node.js MySQL Crear base de datos
+
+Creando una base de datos
+Para crear una base de datos en MySQL, use la declaración "CREATE DATABASE":
+
+
+/////////
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "myusername",
+  password: "mypassword"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  /*Create a database named "mydb":*/
+  con.query("CREATE DATABASE mydb", function (err, result) {
+    if (err) throw err;
+    console.log("Database created");
+  });
+});
+//////////
+
+
+Guarde el código anterior en un archivo llamado "demo_create_db.js" y ejecute el archivo:
+
+Ejecute "demo_create_db.js"
+********************
+C:\Users\Your Name>node demo_create_db.js
+********************
+
+Lo cual te dará este resultado:
+********************
+Connected!
+Database created
+********************
