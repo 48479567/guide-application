@@ -6,10 +6,12 @@
       <a
         class="list-group-item"
         style="cursor: pointer"
-        *ngFor="let ingredient of ingredients"
-      >
-        {{ ingredient.name }} ({{ ingredient.amount }})
+        *ngFor="let ingredient of ingredients; index as i"
+        (click)="remove(i)">
+        {{ i }} - {{ ingredient.name }} ({{ ingredient.amount }})
       </a>
     </ul>
+    <input #productName/>
+    <button (click)="add(productName.value)">Add</button>
   </div>
 </div>
